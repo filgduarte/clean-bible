@@ -1,0 +1,47 @@
+#summary {
+    height: calc(100% - var(--navbars-height));
+    padding: 2rem 0;
+    overflow-y: auto;
+}
+
+#summary.accordion-item  {
+    border-radius: var(--border-radius);
+    padding: 0;
+}
+
+#summary .accordion-item + .accordion-item {
+    margin-top: var(--default-spacing);
+}
+
+#summary .accordion-item h3 {
+    margin: 0;
+}
+
+#summary .accordion-item h3 button {
+    padding: 0.5rem 2rem;
+    width: 100%;
+    text-align: left;
+    background-color: transparent;
+    border: none;
+}
+
+#summary .accordion-item section {
+    display: none;
+    padding: 0 var(--size-largest);
+    margin-bottom: var(--size-regular);
+}
+
+#summary .accordion-item.open section {
+    --_chapter-button-size: calc(var(--navbars-height) * 0.75);
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(var(--_chapter-button-size), 1fr));
+    gap: var(--size-smallest);
+}
+
+#summary .accordion-item section button {
+    width: var(--_chapter-button-size);
+    height: var(--_chapter-button-size);
+    padding: var(--size-small);
+    background-color: var(--color-background);
+    background-image: radial-gradient(at top left, var(--color-primary), var(--color-background));
+}

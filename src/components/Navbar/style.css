@@ -1,0 +1,23 @@
+#navbar {
+    height: var(--navbars-height);
+    background-color: var(--color-background);
+    background-image: radial-gradient(at top left, var(--color-primary), var(--color-background));
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+}
+#navbar button {
+    width: var(--navbars-height);
+    height: var(--navbars-height);
+}
+
+#navbar #goto-summary {
+    width: 100%;
+}
+
+#navbar.summary {
+    grid-template-columns: auto;
+}
+
+#navbar.summary :is(#goto-previous, #goto-next) {
+    display: none;
+}

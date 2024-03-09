@@ -4,6 +4,7 @@ import { currentReadingReducer } from "./states/currentReading";
 import { currentReadingContext } from "./contexts/currentReading";
 import Reader from "./components/Reader";
 import Navbar from "./components/Navbar";
+import Summary from "./components/Summary";
 
 function App() {
   const [currentReading, currentReadingDispatch] = useReducer(
@@ -18,10 +19,9 @@ function App() {
 
   return (
     <currentReadingContext.Provider value={{state: currentReading, dispatch: currentReadingDispatch}}>
-      <div className={currentReading.page}>
         <Reader />
         <Navbar />
-      </div>
+        <Summary />
     </currentReadingContext.Provider>
   )
 }

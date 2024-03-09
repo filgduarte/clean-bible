@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface AppDefs {
     pages: string[];
     bibleVersions: string[];
@@ -10,9 +12,16 @@ export interface CurrentReading {
     chapter: number;
 }
 
+export interface CurrentReadingPayload {
+    page?: string;
+    version?: string;
+    book?: number;
+    chapter?: number;
+}
+
 export interface CurrentReadingAction {
     type: string;
-    payload?: CurrentReading;
+    payload?: CurrentReadingPayload;
 }
 
 export interface CurrentReadingContext {
@@ -39,4 +48,12 @@ export interface BibleData {
     copyright: string;
     language: string;
     texts: BibleBook[];
+}
+
+export interface AccordionItemProps {
+    id: string;
+    title: string;
+    active?: boolean;
+    onClick: () => void;
+    children: ReactNode;
 }

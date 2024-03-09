@@ -1,12 +1,14 @@
 import { useContext } from "react";
-import { currentReadingContext } from "../contexts/currentReading";
-import { bibleInfo, scrollToTop } from "../utils";
+import { CurrentReadingPayload } from "../../types";
+import { currentReadingContext } from "../../contexts/currentReading";
+import { bibleInfo, scrollToTop } from "../../utils";
+import './style.css';
 
-export default function Navbar() {
+function Navbar() {
     const {state, dispatch} = useContext(currentReadingContext);
 
     return(
-        <nav id='navbar'>
+        <nav id='navbar' className={state.page}>
             <button
                 id='goto-previous'
                 title='Anterior'
@@ -18,6 +20,7 @@ export default function Navbar() {
             <button
                 id='goto-summary'
                 title='Índice'
+                onClick = {() => handleNavClick('SET', {page: 'summary'})}
             >
                 {bibleInfo[state.book].name} {state.chapter + 1}
             </button>
@@ -32,8 +35,10 @@ export default function Navbar() {
         </nav>
     );
 
-    function handleNavClick(actionType: string) {
-        dispatch({type: actionType});
+    function handleNavClick(actionType: string, payload?: CurrentReadingPayload) {
+        dispatch({type: actionType, payload: payload});
         scrollToTop();
     }
 }
+
+export default Navbar;

@@ -43,19 +43,19 @@ export function currentReadingReducer(state: CurrentReading, action: CurrentRead
                 ...state,
             };
 
-            if ( appDefs.pages.includes(payload.page) ) {
+            if ( payload.page && appDefs.pages.includes(payload.page) ) {
                 nextState.page = payload.page;
             }
 
-            if ( appDefs.bibleVersions.includes(payload.version) ) {
+            if ( payload.version && appDefs.bibleVersions.includes(payload.version) ) {
                 nextState.version = payload.version;
             }
 
-            if (payload.book >= 0 && payload.book < bibleInfo.length) {
+            if (payload.book && payload.book >= 0 && payload.book < bibleInfo.length) {
                 nextState.book = payload.book;
             }
 
-            if (payload.chapter >= 0 && payload.chapter < bibleInfo[nextState.book].chapters) {
+            if (payload.chapter && payload.chapter >= 0 && payload.chapter < bibleInfo[nextState.book].chapters) {
                 nextState.chapter = payload.chapter;
             }
 

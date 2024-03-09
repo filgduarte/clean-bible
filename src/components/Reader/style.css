@@ -1,0 +1,27 @@
+#reader {
+    height: calc(100% - var(--navbars-height));
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+#reader h1 {
+    margin: 0;
+    font-size: 1.3em;
+    text-align: center;
+}
+
+#reader h2 {
+    margin: 0 0 0.5em;
+    font-size: 4em;
+    text-align: center;
+    line-height: 1.2;
+}
+
+#reader p {
+    font-size: 1em;
+}
+
+#reader small {
+    font-weight: bold;
+    color: color-mix(in srgb, var(--color-secondary) 25%, var(--color-foreground));
+}

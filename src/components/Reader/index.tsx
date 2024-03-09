@@ -1,9 +1,10 @@
 import { useContext, useState, useEffect } from "react";
-import { BibleData } from "../types";
-import { currentReadingContext } from "../contexts/currentReading";
-import { bibleInfo } from "../utils";
+import { BibleData } from "../../types";
+import { currentReadingContext } from "../../contexts/currentReading";
+import { bibleInfo } from "../../utils";
+import './style.css';
 
-export default function Reader() {
+function Reader() {
     const currentReading = useContext(currentReadingContext).state;
     const [bibleData, setBibleData] = useState<BibleData>();
     const [placeholder, setPlaceholder] = useState('Carregando...');
@@ -44,3 +45,5 @@ export default function Reader() {
         </main>
     )
 }
+
+export default Reader;
