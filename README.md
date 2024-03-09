@@ -1,30 +1,53 @@
-# React + TypeScript + Vite
+# Bíblia Clean
+## Aplicativo clean para leitura bíblica
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Criei esse projeto porque o aplicativo que uso no celular para ler a Bíblia tem um monte de recursos que não utilizo e que algumas vezes acabam mais me irritando do que sendo úteis.
 
-Currently, two official plugins are available:
+Eu poderia procurar por um mais simples? Com certeza, mas achei que seria mais divertido criar um do jeito que eu gostaria. :smile:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Funcionalidades pretendidas:
+**Essenciais:**
+- Ler capítulo :heavy_check_mark:
+- Avançar/retroceder capítulo (Navegação) :heavy_check_mark:
+- Escolher livro/capítulo (Índice) :heavy_check_mark:
 
-## Expanding the ESLint configuration
+**Ideais:**
+- Escolher modo claro/escuro
+- Aumentar/reduzir tamanho da fonte
+- Histórico
+- Marcador de página
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+**Extras:**
+- Escolher versão da Bíblia
+- Marcar versículo (ou trecho)
+- Compartilhar texto estilizado
+- Escolher idioma
+- Backup das preferências de usuário
 
-- Configure the top-level `parserOptions` property like this:
+---
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+# Clean Bible
+## Clean application for Bible reading
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+I created this project because the app I use on my phone to read the Bible has a lot of features that I don't use and sometimes end up annoying me more than being useful.
+
+Could I look for a simpler one? Well, definitely, but I thought that would be more fun to create one the way I would like :smile:
+
+### Intended features:
+**Essential:**
+- Read chapter :heavy_check_mark:
+- Go to next/previous chapter (Navigation) :heavy_check_mark:
+- Choose book/chapter (Summary) :heavy_check_mark:
+
+**Ideal:**
+- Choose light/dark mode
+- Increase/decrease font size
+- History
+- Page marker
+
+**Extras:**
+- Choose Bible version
+- Mark verse (or an excerpt)
+- Share stylized text
+- Choose language
+- User preferences backup
