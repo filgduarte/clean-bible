@@ -1,6 +1,6 @@
 export interface AppDefs {
     pages: string[];
-    availableVersions: string[];
+    bibleVersions: string[];
 }
 
 export interface CurrentReading {
@@ -16,7 +16,7 @@ export interface CurrentReadingAction {
 }
 
 export interface CurrentReadingContext {
-    state: CurrentReading | null;
+    state: CurrentReading;
     dispatch: (action: CurrentReadingAction) => void;
 }
 
@@ -28,3 +28,15 @@ export interface BookInfo {
 }
 
 export type BibleInfo = BookInfo[];
+
+export type BibleChapter = string[];
+
+export type BibleBook = BibleChapter[];
+
+export interface BibleData {
+    name: string;
+    abbrev: string;
+    copyright: string;
+    language: string;
+    texts: BibleBook[];
+}

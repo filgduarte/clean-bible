@@ -47,7 +47,7 @@ export function currentReadingReducer(state: CurrentReading, action: CurrentRead
                 nextState.page = payload.page;
             }
 
-            if ( appDefs.availableVersions.includes(payload.version) ) {
+            if ( appDefs.bibleVersions.includes(payload.version) ) {
                 nextState.version = payload.version;
             }
 

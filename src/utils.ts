@@ -2,7 +2,7 @@ import { AppDefs, BibleInfo } from "./types";
 
 export const appDefs: AppDefs = {
     pages: [ 'read', 'summary' ],
-    availableVersions: [ 'blt' ],
+    bibleVersions: [ 'blivre' ],
 };
 
 export const bibleInfo: BibleInfo = [
