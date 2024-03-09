@@ -6,18 +6,18 @@ Criei esse projeto porque o aplicativo que uso no celular para ler a Bíblia tem
 Eu poderia procurar por um mais simples? Com certeza, mas achei que seria mais divertido criar um do jeito que eu gostaria. :smile:
 
 ### Funcionalidades pretendidas:
-**Essenciais:**
+#### Essenciais:*
 - Ler capítulo :heavy_check_mark:
 - Avançar/retroceder capítulo (Navegação) :heavy_check_mark:
 - Escolher livro/capítulo (Índice) :heavy_check_mark:
 
-**Ideais:**
+#### Ideais:
 - Escolher modo claro/escuro
 - Aumentar/reduzir tamanho da fonte
 - Histórico
 - Marcador de página
 
-**Extras:**
+#### Extras:
 - Escolher versão da Bíblia
 - Marcar versículo (ou trecho)
 - Compartilhar texto estilizado
@@ -34,18 +34,18 @@ I created this project because the app I use on my phone to read the Bible has a
 Could I look for a simpler one? Well, definitely, but I thought that would be more fun to create one the way I would like :smile:
 
 ### Intended features:
-**Essential:**
+#### Essential:
 - Read chapter :heavy_check_mark:
 - Go to next/previous chapter (Navigation) :heavy_check_mark:
 - Choose book/chapter (Summary) :heavy_check_mark:
 
-**Ideal:**
+#### Ideal:
 - Choose light/dark mode
 - Increase/decrease font size
 - History
 - Page marker
 
-**Extras:**
+#### Extras:
 - Choose Bible version
 - Mark verse (or an excerpt)
 - Share stylized text
