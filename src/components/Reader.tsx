@@ -3,7 +3,7 @@ import { BibleData } from "../types";
 import { currentReadingContext } from "../contexts/currentReading";
 import { bibleInfo } from "../utils";
 
-export function Reader() {
+export default function Reader() {
     const currentReading = useContext(currentReadingContext).state;
     const [bibleData, setBibleData] = useState<BibleData>();
     const [placeholder, setPlaceholder] = useState('Carregando...');

@@ -2,7 +2,8 @@ import { useReducer } from "react";
 import { appDefs } from "./utils";
 import { currentReadingReducer } from "./states/currentReading";
 import { currentReadingContext } from "./contexts/currentReading";
-import { Reader } from "./components/Reader";
+import Reader from "./components/Reader";
+import Navbar from "./components/Navbar";
 
 function App() {
   const [currentReading, currentReadingDispatch] = useReducer(
@@ -17,10 +18,9 @@ function App() {
 
   return (
     <currentReadingContext.Provider value={{state: currentReading, dispatch: currentReadingDispatch}}>
-      <div>
+      <div className={currentReading.page}>
         <Reader />
-        <button onClick={() => currentReadingDispatch({type: 'PREVIOUS'})}>Previous</button>
-        <button onClick={() => currentReadingDispatch({type: 'NEXT'})}>Next</button>
+        <Navbar />
       </div>
     </currentReadingContext.Provider>
   )

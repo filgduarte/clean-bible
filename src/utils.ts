@@ -73,3 +73,7 @@ export const bibleInfo: BibleInfo = [
     { testament: 1, abbrev: "jd", name: "Judas", chapters: 1 },
     { testament: 1, abbrev: "ap", name: "Apocalipse", chapters: 22}
 ];
+
+export function scrollToTop() {
+    document.getElementById('reader')?.scrollTo({ top: 0 });
+}
