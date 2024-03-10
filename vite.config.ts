@@ -11,9 +11,9 @@ export default defineConfig({
       includeAssets: ['favicon.ico', 'apple-touch-icon.png'],
       manifest: {
         name: "Bíblia Clean",
-        short_name: "CleanBible",
+        short_name: "Bíblia Clean",
         description: "Aplicativo clean para leitura bíblica",
-        theme_color: "#ECD0A9",
+        theme_color: "#9E8370",
         icons: [
           {
             src: "pwa-192x192.png",

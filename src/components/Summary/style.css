@@ -51,7 +51,7 @@
 
 @media (prefers-color-scheme: dark) {
     #summary .accordion-item section button {
-      border: 1px solid color-mix(in srgb, var(--color-accent) 10%, var(--color-background));
+      border: 1px solid color-mix(in srgb, var(--color-accent) 25%, var(--color-background));
       border-bottom: 1px solid color-mix(in srgb, black 5%, var(--color-background));
       border-right: 1px solid color-mix(in srgb, black 5%, var(--color-background));
     }

@@ -64,6 +64,6 @@ button {
   :root {
     --color-foreground: #F4EBDA;
     --color-background: #151009;
-    --color-radial-gradient: radial-gradient(at top left, color-mix(in srgb, var(--color-secondary) 15%, var(--color-background)), var(--color-background));
+    --color-radial-gradient: radial-gradient(at top left, color-mix(in srgb, var(--color-secondary) 50%, var(--color-background)), var(--color-background));
   }
 }

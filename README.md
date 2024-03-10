@@ -6,7 +6,7 @@ Criei esse projeto porque o aplicativo que uso no celular para ler a Bíblia tem
 Eu poderia procurar por um mais simples? Com certeza, mas achei que seria mais divertido criar um do jeito que eu gostaria. :smile:
 
 ### Funcionalidades pretendidas:
-#### Essenciais:*
+#### Essenciais:
 - Ler capítulo :heavy_check_mark:
 - Avançar/retroceder capítulo (Navegação) :heavy_check_mark:
 - Escolher livro/capítulo (Índice) :heavy_check_mark:
