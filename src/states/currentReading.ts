@@ -1,5 +1,5 @@
-import { bibleInfo, appDefs } from "../utils";
 import { CurrentReading, CurrentReadingAction } from "../types";
+import { bibleInfo, appDefs } from "../utils";
 
 export function currentReadingReducer(state: CurrentReading, action: CurrentReadingAction): CurrentReading {
     const { type, payload } = action;

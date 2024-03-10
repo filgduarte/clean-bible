@@ -1,6 +1,6 @@
 import { useContext, useState, useEffect } from "react";
-import { BibleData } from "../../types";
 import { currentReadingContext } from "../../contexts/currentReading";
+import { BibleData } from "../../types";
 import { bibleInfo } from "../../utils";
 import './style.css';
 

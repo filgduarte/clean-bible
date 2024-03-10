@@ -1,7 +1,7 @@
 #navbar {
     height: var(--navbars-height);
     background-color: var(--color-background);
-    background-image: radial-gradient(at top left, var(--color-primary), var(--color-background));
+    background-image: var(--color-radial-gradient);
     display: grid;
     grid-template-columns: auto 1fr auto;
 }

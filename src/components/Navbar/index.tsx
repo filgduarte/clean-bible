@@ -1,7 +1,8 @@
 import { useContext } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { CurrentReadingPayload } from "../../types";
-import { currentReadingContext } from "../../contexts/currentReading";
 import { bibleInfo, scrollToTop } from "../../utils";
+import { currentReadingContext } from "../../contexts/currentReading";
 import './style.css';
 
 function Navbar() {
@@ -14,7 +15,7 @@ function Navbar() {
                 title='Anterior'
                 onClick={() => handleNavClick('PREVIOUS')}
             >
-                Previous
+                <ChevronLeft />
             </button>
 
             <button
@@ -30,7 +31,7 @@ function Navbar() {
                 title='Próximo'
                 onClick={() => handleNavClick('NEXT')}
             >
-                    Next
+                    <ChevronRight />
             </button>
         </nav>
     );

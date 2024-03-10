@@ -10,11 +10,12 @@
   --size-largest: calc( var(--size-regular) * 2);
   --navbars-height: calc(var(--size-largest) * 2);
 
-  --color-foreground: #DDE3E6;
-  --color-background: #15161A;
-  --color-primary: #333A3F;
-  --color-secondary: #0063AA;
-  --color-accent: #10A2F6;
+  --color-foreground: #151009;
+  --color-background: #F4EBDA;
+  --color-primary: #9E8370;
+  --color-secondary: #6A5555;
+  --color-accent: #ECD0A9;
+  --color-radial-gradient: radial-gradient(at top left, white, var(--color-background));
 
   font-family: system-ui, sans-serif;
   line-height: 1.5;
@@ -30,7 +31,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   background-color: var(--color-background);
-  background-image: radial-gradient(at top left, var(--color-primary), var(--color-background));
+  background-image: var(--color-radial-gradient);
 }
 
 h1 {
@@ -50,7 +51,7 @@ button {
 }
 
 #app {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   overflow: hidden;
 }
@@ -59,12 +60,10 @@ button {
   display: none !important;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
   :root {
-    --color-foreground: #1A2023;
-    --color-background: #E6E7EB;
-    --color-primary: #C1C8CD;
-    --color-secondary: #57B9FF;
-    --color-accent: #099CF1;
+    --color-foreground: #F4EBDA;
+    --color-background: #151009;
+    --color-radial-gradient: radial-gradient(at top left, color-mix(in srgb, var(--color-secondary) 15%, var(--color-background)), var(--color-background));
   }
 }

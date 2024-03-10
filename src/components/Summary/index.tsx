@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import AccordionItem from "../AccordionItem";
 import { currentReadingContext } from "../../contexts/currentReading";
 import { bibleInfo, scrollToTop } from "../../utils";
+import AccordionItem from "../AccordionItem";
 import './style.css';
 
 function Summary() {
