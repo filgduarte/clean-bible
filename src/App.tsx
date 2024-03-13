@@ -5,6 +5,7 @@ import { currentReadingContext } from "./contexts/currentReading";
 import Reader from "./components/Reader";
 import Navbar from "./components/Navbar";
 import Summary from "./components/Summary";
+import Toolbar from "./components/Toolbar";
 
 function App() {
   const [currentReading, currentReadingDispatch] = useReducer(
@@ -19,9 +20,12 @@ function App() {
 
   return (
     <currentReadingContext.Provider value={{state: currentReading, dispatch: currentReadingDispatch}}>
-        <Reader />
-        <Navbar />
-        <Summary />
+        <div id='bible'>
+          <Toolbar />
+          <Reader />
+          <Navbar />
+          <Summary />
+        </div>
     </currentReadingContext.Provider>
   )
 }
