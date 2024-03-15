@@ -6,7 +6,7 @@ import { CurrentReadingContext, PageContext, UserPreferencesContext } from "../.
 
 function Reader() {
     const userPreferences = useContext(UserPreferencesContext);
-    const page = useContext(PageContext);
+    const pageInfo = useContext(PageContext);
     const currentReading = useContext(CurrentReadingContext);
     const [bibleData, setBibleData] = useState<BibleData>();
     const [placeholder, setPlaceholder] = useState('Carregando...');
@@ -32,7 +32,7 @@ function Reader() {
     }, [userPreferences.version]);
 
     return (
-        <main id='reader' className={(page == 'read') ? '' : 'hidden'}>
+        <main id='reader' className={(pageInfo.page == 'read') ? '' : 'hidden'}>
             <h1>{bibleInfo[currentReading.book].name}</h1>
             <h2>{currentReading.chapter + 1}</h2>
             {

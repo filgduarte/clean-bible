@@ -33,3 +33,8 @@ export interface CurrentReading {
     book: number;
     chapter: number;
 }
+
+export interface PageInfo {
+    page: string;
+    book: number;
+}

@@ -23,11 +23,12 @@ function Toolbar() {
                         <button
                             id='change-theme'
                             title='Alternar modo claro/escuro'
+                            onClick={toggleTheme}
                         >
                             {
-                                (theme == 'light')
-                                ? <Moon /> + 'Mudar para modo escuro'
-                                : <Sun /> + 'Mudar para modo claro'
+                                theme == 'light'
+                                ? <><Moon /> Mudar para modo escuro</>
+                                : <><Sun /> Mudar para modo claro</>
                             }
                         </button>
                     </li>
@@ -42,10 +43,13 @@ function Toolbar() {
 
     async function toggleTheme() {
         try {
-            const currentTheme = await db.preferences.put({
-                option,
-                value
+            await db.preferences.put({
+                option: 'theme',
+                value: (theme == 'light') ? 'dark' : 'light',
             });
+        }
+        catch(err) {
+            console.log(err);
         }
     }
 }

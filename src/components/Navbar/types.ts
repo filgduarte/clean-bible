@@ -1,3 +1,5 @@
+import { PageInfo } from "../../types";
+
 export interface NavbarProps {
-    setPage: (value: string) => void;
+    setPage: (value: PageInfo) => void;
 }

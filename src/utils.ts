@@ -78,5 +78,5 @@ export const bibleInfo: BibleInfo = [
 ];
 
 export function scrollToTop() {
-    document.getElementById('reader')?.scrollTo({ top: 0 });
+    window.scrollTo({ top: 0 });
 }

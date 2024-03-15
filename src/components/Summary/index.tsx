@@ -1,20 +1,22 @@
-import { useContext, useState } from "react";
-import { currentReadingContext } from "../../contexts/currentReading";
+import { useContext } from "react";
+import { PageContext } from "../../context";
+import { addToHistory } from "../../models/history";
 import { bibleInfo, scrollToTop } from "../../utils";
+import { SummaryProps } from "./types";
 import AccordionItem from "../AccordionItem";
 import './style.css';
 
-function Summary() {
-    const {state, dispatch} = useContext(currentReadingContext);
-    const [currentSummary, setCurrentSummary] = useState(state.book);
+function Summary({setPage}: SummaryProps) {
+    const pageInfo = useContext(PageContext);
+
     return (
-        <aside id='summary' className={(state.page == 'summary' ? '' : 'hidden')}>
+        <aside id='summary' className={(pageInfo.page == 'summary' ? '' : 'hidden')}>
             {
                 bibleInfo.map((book, bookIndex) => (
                     <AccordionItem
                         id={`book-selector-${bookIndex}`}
                         title={book.name}
-                        active={bookIndex == currentSummary}
+                        active={bookIndex == pageInfo.book}
                         onClick={() => handleAccordionItemClick(bookIndex)}
                         key={bookIndex}
                     >
@@ -45,19 +47,24 @@ function Summary() {
     }
 
     function handleAccordionItemClick(index: number) {
-        setCurrentSummary( (index == currentSummary) ? -1 : index );
+        setPage({
+            page: pageInfo.page,
+            book: (index === pageInfo.book) ? -1 : index
+        });
     }
 
-    function onBookChapterSelect(selectedBook: number, selectedChapter: number) {
-        dispatch({
-            type: 'SET',
-            payload: {
-                page: 'read',
+    async function onBookChapterSelect(selectedBook: number, selectedChapter: number) {
+        addToHistory({
                 book: selectedBook,
                 chapter: selectedChapter,
-            }
+        })
+        .then(() => {
+            setPage({
+                page: 'read',
+                book: selectedBook
+            });
+            scrollToTop();
         });
-        scrollToTop();
     }
 }
 

@@ -6,10 +6,10 @@ import Summary from "./components/Summary";
 import Toolbar from "./components/Toolbar";
 import { db } from "./models/db";
 import { UserPreferencesContext, PageContext, CurrentReadingContext } from "./context";
-import { UserPreferenceOptions, CurrentReading } from "./types";
+import { UserPreferenceOptions, CurrentReading, PageInfo } from "./types";
 
 function App() {
-    const [page, setPage] = useState('read');
+    const [page, setPage] = useState<PageInfo>({page: 'read', book: 0});
     
     const preferencesResults = useLiveQuery(
         () => db.preferences.toArray()
@@ -46,10 +46,10 @@ function App() {
                 <CurrentReadingContext.Provider value={currentReading}>
 
                     <div id='bible' className={(userPreferences && userPreferences.theme) ? userPreferences.theme : ''}>
-                        {/* <Toolbar /> */}
+                        <Toolbar />
                         <Reader />
                         <Navbar setPage={setPage} />
-                        {/* <Summary /> */}
+                        <Summary setPage={setPage} />
                     </div>
 
                 </CurrentReadingContext.Provider>

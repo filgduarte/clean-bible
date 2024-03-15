@@ -7,11 +7,11 @@ import { NavbarProps } from "./types";
 import './style.css';
 
 function Navbar({setPage}: NavbarProps) {
-    const page = useContext(PageContext);
+    const pageInfo = useContext(PageContext);
     const currentReading = useContext(CurrentReadingContext);
 
     return(
-        <nav id='navbar' className={page}>
+        <nav id='navbar' className={pageInfo.page}>
             <button
                 id='goto-previous'
                 title='Anterior'
@@ -38,7 +38,7 @@ function Navbar({setPage}: NavbarProps) {
         </nav>
     );
 
-    function handlePreviousClick() {
+    async function handlePreviousClick() {
         let previousChapter = null;
 
         if (currentReading.chapter > 0) {
@@ -55,12 +55,12 @@ function Navbar({setPage}: NavbarProps) {
         }
 
         if (previousChapter) {
-            addToHistory(previousChapter);
-            scrollToTop();
+            await addToHistory(previousChapter)
+            .then(scrollToTop);
         }
     }
 
-    function handleNextClick() {
+    async function handleNextClick() {
         let nextChapter = null;
         if (currentReading.chapter < bibleInfo[currentReading.book].chapters - 1) {
             nextChapter = {
@@ -76,14 +76,16 @@ function Navbar({setPage}: NavbarProps) {
         }
 
         if (nextChapter) {
-            addToHistory(nextChapter);
-            scrollToTop();
+            await addToHistory(nextChapter)
+            .then(scrollToTop);
         }
     }
 
     function handleSummaryClick() {
-        setPage( (page == 'read') ? 'summary' : 'read' );
-
+        setPage({
+            page: (pageInfo.page == 'read') ? 'summary' : 'read',
+            book: currentReading.book
+        });
         scrollToTop();
     }
 }

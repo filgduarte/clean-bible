@@ -1,6 +1,6 @@
 import { createContext } from 'react';
-import { UserPreferenceOptions } from './types';
+import { PageInfo, UserPreferenceOptions } from './types';
 
 export const UserPreferencesContext = createContext<UserPreferenceOptions>({});
-export const PageContext = createContext('read');
-export const CurrentReadingContext = createContext({book: 1, chapter: 1});
+export const PageContext = createContext<PageInfo>({page: 'read', book: 0});
+export const CurrentReadingContext = createContext({book: 0, chapter: 0});
