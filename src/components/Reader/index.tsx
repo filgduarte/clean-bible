@@ -1,16 +1,19 @@
 import { useContext, useState, useEffect } from "react";
-import { currentReadingContext } from "../../contexts/currentReading";
-import { BibleData } from "../../types";
+import { BibleData } from "./types";
 import { bibleInfo } from "../../utils";
 import './style.css';
+import { CurrentReadingContext, PageContext, UserPreferencesContext } from "../../context";
 
 function Reader() {
-    const currentReading = useContext(currentReadingContext).state;
+    const userPreferences = useContext(UserPreferencesContext);
+    const page = useContext(PageContext);
+    const currentReading = useContext(CurrentReadingContext);
     const [bibleData, setBibleData] = useState<BibleData>();
     const [placeholder, setPlaceholder] = useState('Carregando...');
+
     useEffect(() => {
         const params = {
-            version: currentReading.version,
+            version: userPreferences.version,
             abbrev: bibleInfo[currentReading.book].abbrev,
             chapter: currentReading.chapter + 1
         };
@@ -26,10 +29,10 @@ function Reader() {
             setPlaceholder('Houve um erro ao carregar os dados.');
             console.log(err.message);
         });
-    }, [currentReading.version]);
+    }, [userPreferences.version]);
 
     return (
-        <main id='reader' className={(currentReading.page == 'read') ? '' : 'hidden'}>
+        <main id='reader' className={(page == 'read') ? '' : 'hidden'}>
             <h1>{bibleInfo[currentReading.book].name}</h1>
             <h2>{currentReading.chapter + 1}</h2>
             {

@@ -1,4 +1,4 @@
-import { AccordionItemProps } from "../../types";
+import { AccordionItemProps } from "./types";
 
 function AccordionItem({id, title, active, onClick, children} : AccordionItemProps) {    
     return(

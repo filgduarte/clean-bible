@@ -1,32 +1,14 @@
-import { ReactNode } from "react";
-
 export interface AppDefs {
     pages: string[];
+    languages: string[];
     bibleVersions: string[];
+    fontSizeLimit: FontSizeLimit;
+    historySize: number;
 }
 
-export interface CurrentReading {
-    page: string;
-    version: string;
-    book: number;
-    chapter: number;
-}
-
-export interface CurrentReadingPayload {
-    page?: string;
-    version?: string;
-    book?: number;
-    chapter?: number;
-}
-
-export interface CurrentReadingAction {
-    type: string;
-    payload?: CurrentReadingPayload;
-}
-
-export interface CurrentReadingContext {
-    state: CurrentReading;
-    dispatch: (action: CurrentReadingAction) => void;
+export interface FontSizeLimit {
+    min: number;
+    max: number;
 }
 
 export interface BookInfo {
@@ -38,22 +20,16 @@ export interface BookInfo {
 
 export type BibleInfo = BookInfo[];
 
-export type BibleChapter = string[];
-
-export type BibleBook = BibleChapter[];
-
-export interface BibleData {
-    name: string;
-    abbrev: string;
-    copyright: string;
-    language: string;
-    texts: BibleBook[];
+export interface Bookmark {
+    book: number | null;
+    chapter: number | null;
 }
 
-export interface AccordionItemProps {
-    id: string;
-    title: string;
-    active?: boolean;
-    onClick: () => void;
-    children: ReactNode;
+export interface UserPreferenceOptions {
+    [key: string]: string;
+}
+
+export interface CurrentReading {
+    book: number;
+    chapter: number;
 }

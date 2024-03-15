@@ -49,3 +49,8 @@
     align-items: center;
     gap: var(--size-small);
 }
+
+#toolbar .lucide-contrast path {
+    fill: currentColor;
+    stroke: none;
+}
