@@ -25,6 +25,12 @@
   color-scheme: light dark;
 }
 
+body.dark {
+    --color-foreground: #F4EBDA;
+    --color-background: #151009;
+    --color-radial-gradient: radial-gradient(at top left, color-mix(in srgb, var(--color-secondary) 50%, var(--color-background)), var(--color-background));
+}
+
 body {
   margin: 0;
   display: flex;
@@ -48,6 +54,7 @@ button {
   background-color: transparent;
   border: none;
   border-radius: var(--size-smallest);
+  color: var(--color-foreground);
   cursor: pointer;
 }
 
@@ -66,13 +73,13 @@ button {
   display: none !important;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   :root {
     --color-foreground: #F4EBDA;
     --color-background: #151009;
     --color-radial-gradient: radial-gradient(at top left, color-mix(in srgb, var(--color-secondary) 50%, var(--color-background)), var(--color-background));
   }
-}
+} */
 
 @media (min-width: 901px) {
   #bible {

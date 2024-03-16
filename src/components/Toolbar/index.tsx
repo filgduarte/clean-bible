@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { Sun, Moon, EllipsisVertical } from "lucide-react";
 import './style.css';
 import { db } from "../../models/db";
@@ -7,6 +7,19 @@ import { UserPreferencesContext } from "../../context";
 function Toolbar() {
     const [optionsActive, setOptionsActive] = useState(false);
     const theme = useContext(UserPreferencesContext).theme;
+
+    useEffect(() => {
+        switch (theme) {
+            case 'light':
+                document.body.classList.remove('dark');
+                document.body.classList.add('light');
+                break;
+            case 'dark':
+                document.body.classList.remove('light');
+                document.body.classList.add('dark');
+                break;
+        }
+    }, [theme]);
 
     return(
         <menu id='toolbar'>

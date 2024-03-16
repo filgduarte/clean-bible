@@ -45,7 +45,7 @@ function App() {
             <PageContext.Provider value={page}>
                 <CurrentReadingContext.Provider value={currentReading}>
 
-                    <div id='bible' className={(userPreferences && userPreferences.theme) ? userPreferences.theme : ''}>
+                    <div id='bible'>
                         <Toolbar />
                         <Reader />
                         <Navbar setPage={setPage} />
