@@ -1,5 +1,5 @@
 #summary {
-    height: calc(100% - var(--navbars-height));
+    height: calc(100% - (var(--navbars-height) * 2));
     padding: 2rem 0;
     overflow-y: auto;
 }
@@ -10,11 +10,13 @@
 }
 
 #summary .accordion-item + .accordion-item {
-    margin-top: var(--default-spacing);
+    margin-top: var(--size-smallest);
 }
 
 #summary .accordion-item h3 {
     margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 #summary .accordion-item h3 button {

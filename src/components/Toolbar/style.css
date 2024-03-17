@@ -24,7 +24,7 @@
     width: 100%;
 }
 
-.toolbar__item {
+#toolbar .menu-item {
     position: relative;
     text-wrap: nowrap;
 }
@@ -40,11 +40,11 @@
     background-image: var(--color-radial-gradient);
 }
 
-.toolbar__item.active .submenu {
+#toolbar .menu-item.active .submenu {
     display: block;
 }
 
-#toolbar .submenu-item button {
+#toolbar .submenu .menu-item button {
     display: flex;
     align-items: center;
     gap: var(--size-small);

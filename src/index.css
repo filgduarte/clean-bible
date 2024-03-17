@@ -49,7 +49,7 @@ h1 {
 button {
   padding: 0.6em 1.2em;
   font-size: 1em;
-  font-weight: 500;
+  font-weight: 400;
   font-family: inherit;
   background-color: transparent;
   border: none;
@@ -60,48 +60,16 @@ button {
 
 #app {
   width: 100%;
-}
-
-#bible {
-  width: 100%;
   height: 100vh;
   overflow: hidden;
   background-image: var(--color-radial-gradient);
 }
 
-.hidden {
-  display: none !important;
+#bible {
+  height: 100vh;
+  overflow: hidden;
 }
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --color-foreground: #F4EBDA;
-    --color-background: #151009;
-    --color-radial-gradient: radial-gradient(at top left, color-mix(in srgb, var(--color-secondary) 50%, var(--color-background)), var(--color-background));
-  }
-} */
-
-@media (min-width: 901px) {
-  #bible {
-    position: relative;
-    margin: var(--navbars-height) auto;
-    max-width: var(--max-width);
-    width: 100%;
-    height: auto;
-    overflow: auto;
-  }
-
-  #toolbar {
-    position: fixed;
-    top: 0;
-    max-width: var(--max-width);
-    width: 100%;
-  }
-
-  #navbar {
-    position: fixed;
-    bottom: 0;
-    max-width: var(--max-width);
-    width: 100%;
-  }
+.hidden {
+  display: none !important;
 }

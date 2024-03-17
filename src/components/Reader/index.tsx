@@ -32,7 +32,7 @@ function Reader() {
     }, [userPreferences.version]);
 
     return (
-        <main id='reader' className={(pageInfo.page == 'read') ? '' : 'hidden'}>
+        <main id='reader' className={(pageInfo.page == 'read') ? '' : 'hidden'} style={{fontSize: userPreferences.fontSize + 'rem'}}>
             <h1>{bibleInfo[currentReading.book].name}</h1>
             <h2>{currentReading.chapter + 1}</h2>
             {

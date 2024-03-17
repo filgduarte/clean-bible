@@ -1,4 +1,7 @@
 #navbar {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
     height: var(--navbars-height);
     background-color: var(--color-background);
     background-image: var(--color-radial-gradient);
@@ -8,6 +11,7 @@
 #navbar button {
     width: var(--navbars-height);
     height: var(--navbars-height);
+    font-weight: 600;
 }
 
 #navbar #goto-summary {

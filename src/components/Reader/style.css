@@ -1,6 +1,7 @@
 #reader {
-    min-height: calc(100vh - var(--navbars-height));
+    height: calc(100% - (var(--navbars-height) * 2));
     padding: 2rem;
+    overflow-y: auto;
 }
 
 #reader h1 {
