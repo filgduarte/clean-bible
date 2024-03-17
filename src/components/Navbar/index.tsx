@@ -1,8 +1,8 @@
 import { useContext } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { bibleInfo, scrollToTop } from "../../utils";
 import { addToHistory } from "../../models/history";
 import { PageContext, HistoryContext } from "../../context";
+import { bibleInfo, scrollToTop } from "../../utils";
 import { NavbarProps } from "./types";
 import './style.css';
 

@@ -1,27 +1,33 @@
 #reader {
-    height: calc(100% - (var(--navbars-height) * 2));
-    padding: 2rem;
+    height: calc(100% - var(--navbars-height));
+    padding: var(--size-regular) 2rem;
     overflow-y: auto;
 }
 
 #reader h1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin: 0;
-    font-size: 1.3em;
-    text-align: center;
+    height: calc(var(--size-largest) * 1.5);
+    font-size: 1.333em;
 }
 
 #reader h2 {
     margin: 0 0 0.5em;
     font-size: 4em;
     text-align: center;
-    line-height: 1.2;
+    line-height: 1;
 }
 
 #reader p {
     font-size: 1em;
+    margin: 0.5em 0;
 }
 
 #reader small {
+    display: inline-flex;
+    align-items: center;
     font-weight: bold;
     color: color-mix(in srgb, var(--color-secondary) 25%, var(--color-foreground));
 }

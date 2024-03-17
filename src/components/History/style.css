@@ -1,0 +1,31 @@
+#history {
+    padding: var(--size-regular);
+}
+
+#history h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: calc(var(--size-largest) * 1.5);
+}
+
+#history-list {
+    margin: var(--size-small) 0 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+#history-list button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
+    padding: var(--size-small) var(--size-regular);
+    width: 100%;
+}
+
+#history-list small {
+    font-size: 0.666em;
+    color: var(--color-primary);
+}

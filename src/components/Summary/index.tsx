@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { PageContext } from "../../context";
 import { addToHistory } from "../../models/history";
+import { PageContext } from "../../context";
 import { bibleInfo, scrollToTop } from "../../utils";
 import { SummaryProps } from "./types";
 import AccordionItem from "../AccordionItem";

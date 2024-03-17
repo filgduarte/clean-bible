@@ -1,5 +1,5 @@
-import { appDefs } from "../utils";
 import { db } from "./db";
+import { appDefs } from "../utils";
 import { CurrentReading } from "../types";
 
 export async function addToHistory(entry: CurrentReading) {

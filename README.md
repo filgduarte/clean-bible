@@ -14,7 +14,7 @@ Eu poderia procurar por um mais simples? Com certeza, mas achei que seria mais d
 #### Ideais:
 - Escolher modo claro/escuro :heavy_check_mark:
 - Aumentar/reduzir tamanho da fonte :heavy_check_mark:
-- Histórico
+- Histórico :heavy_check_mark:
 - Marcador de página
 
 #### Extras:
@@ -40,9 +40,9 @@ Could I look for a simpler one? Well, definitely, but I thought that would be mo
 - Choose book/chapter (Summary) :heavy_check_mark:
 
 #### Ideal:
-- Choose light/dark mode
-- Increase/decrease font size
-- History
+- Choose light/dark mode :heavy_check_mark:
+- Increase/decrease font size :heavy_check_mark:
+- History :heavy_check_mark:
 - Page marker
 
 #### Extras:

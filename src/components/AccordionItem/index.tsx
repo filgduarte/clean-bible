@@ -2,7 +2,7 @@ import { AccordionItemProps } from "./types";
 
 function AccordionItem({id, title, active, onClick, children} : AccordionItemProps) {    
     return(
-        <div className={`accordion-item ${active ? 'open' : ''}`}>
+        <div id={id} className={`accordion-item ${active ? 'open' : ''}`}>
             <h3>
                 <button
                     id={`${id}-header`}

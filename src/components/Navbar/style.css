@@ -3,8 +3,7 @@
     bottom: 0;
     width: 100%;
     height: var(--navbars-height);
-    background-color: var(--color-background);
-    background-image: var(--color-radial-gradient);
+    background-color: transparent;
     display: grid;
     grid-template-columns: auto 1fr auto;
 }

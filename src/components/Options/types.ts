@@ -1,5 +1,5 @@
 import { PageInfo } from "../../types";
 
-export interface ToolbarProps {
+export interface OptionsProps {
     setPage: (value: PageInfo) => void;
 }

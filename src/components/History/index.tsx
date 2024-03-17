@@ -1,16 +1,18 @@
 import { useContext } from "react";
-import { HistoryContext } from "../../context";
 import { addToHistory } from "../../models/history";
+import { HistoryContext, PageContext } from "../../context";
 import { bibleInfo, scrollToTop } from "../../utils";
 import { HistoryProps } from "./types";
+import './style.css';
 
 function History({setPage}: HistoryProps) {
     const history = useContext(HistoryContext);
+    const currentPage = useContext(PageContext).page;
     
     return (
-        <aside id='history'>
+        <aside id='history' className={(currentPage == 'history') ? '' : 'hidden'}>
             <h2>Histórico</h2>
-            <ul className='history-list'>
+            <ul id='history-list'>
                 {
                     history.map( (entry, index) => (
                         <li className='history-list__entry' key={index}>

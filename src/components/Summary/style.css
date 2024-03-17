@@ -1,16 +1,20 @@
 #summary {
-    height: calc(100% - (var(--navbars-height) * 2));
-    padding: 2rem 0;
+    height: calc(100% - var(--navbars-height));
+    padding: var(--size-regular);
     overflow-y: auto;
+}
+
+#summary h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: calc(var(--size-largest) * 1.5);
 }
 
 #summary.accordion-item  {
     border-radius: var(--border-radius);
     padding: 0;
-}
-
-#summary .accordion-item + .accordion-item {
-    margin-top: var(--size-smallest);
 }
 
 #summary .accordion-item h3 {
@@ -20,7 +24,7 @@
 }
 
 #summary .accordion-item h3 button {
-    padding: 0.5rem 2rem;
+    padding: var(--size-small) var(--size-regular);
     width: 100%;
     text-align: left;
     background-color: transparent;
@@ -29,7 +33,7 @@
 
 #summary .accordion-item section {
     display: none;
-    padding: 0 var(--size-largest);
+    padding: 0 var(--size-regular);
     margin-bottom: var(--size-regular);
 }
 
@@ -44,17 +48,6 @@
     width: var(--_chapter-button-size);
     height: var(--_chapter-button-size);
     padding: var(--size-small);
-    background-color: var(--color-background);
-    background-image: var(--color-radial-gradient);
-    border: 1px solid white;
-    border-bottom: 1px solid color-mix(in srgb, var(--color-secondary) 5%, var(--color-background));
-    border-right: 1px solid color-mix(in srgb, var(--color-secondary) 5%, var(--color-background));
+    background-color: transparent;
+    border: 1px solid var(--color-secondary);
 }
-
-@media (prefers-color-scheme: dark) {
-    #summary .accordion-item section button {
-      border: 1px solid color-mix(in srgb, var(--color-accent) 25%, var(--color-background));
-      border-bottom: 1px solid color-mix(in srgb, black 5%, var(--color-background));
-      border-right: 1px solid color-mix(in srgb, black 5%, var(--color-background));
-    }
-  }

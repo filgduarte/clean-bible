@@ -3,9 +3,9 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "./models/db";
 import { UserPreferencesContext, PageContext, HistoryContext } from "./context";
 import { UserPreferenceOptions, PageInfo, HistoryEntry } from "./types";
-import Navbar from "./components/Navbar";
-import Toolbar from "./components/Toolbar";
+import Options from "./components/Options";
 import Reader from "./components/Reader";
+import Navbar from "./components/Navbar";
 import Summary from "./components/Summary";
 import History from "./components/History";
 
@@ -49,14 +49,16 @@ function App() {
                 {(preferencesResults && HistoryResult)
                     ?
                         <div id='bible'>
-                            <Toolbar setPage={setPage} />
+                            <Options setPage={setPage} />
                             <Reader />
                             <Navbar setPage={setPage} />
                             <Summary setPage={setPage} />
                             <History setPage={setPage} />
                         </div>
                     :
-                        <div id='loading'></div>
+                        <div id='loading'>
+                            Carregando...
+                        </div>
                 }
 
                 </HistoryContext.Provider>
