@@ -12,8 +12,8 @@ Eu poderia procurar por um mais simples? Com certeza, mas achei que seria mais d
 - Escolher livro/capítulo (Índice) :heavy_check_mark:
 
 #### Ideais:
-- Escolher modo claro/escuro
-- Aumentar/reduzir tamanho da fonte
+- Escolher modo claro/escuro :heavy_check_mark:
+- Aumentar/reduzir tamanho da fonte :heavy_check_mark:
 - Histórico
 - Marcador de página
 
