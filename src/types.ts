@@ -38,3 +38,9 @@ export interface PageInfo {
     page: string;
     book: number;
 }
+
+export interface HistoryEntry {
+    date: string;
+    book: number;
+    chapter: number;
+}

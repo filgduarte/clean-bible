@@ -1,13 +1,13 @@
 import { useContext, useState, useEffect } from "react";
-import { BibleData } from "./types";
+import { UserPreferencesContext, PageContext, HistoryContext } from "../../context";
 import { bibleInfo } from "../../utils";
+import { BibleData } from "./types";
 import './style.css';
-import { CurrentReadingContext, PageContext, UserPreferencesContext } from "../../context";
 
 function Reader() {
     const userPreferences = useContext(UserPreferencesContext);
     const pageInfo = useContext(PageContext);
-    const currentReading = useContext(CurrentReadingContext);
+    const currentReading = useContext(HistoryContext)[0];
     const [bibleData, setBibleData] = useState<BibleData>();
     const [placeholder, setPlaceholder] = useState('Carregando...');
 

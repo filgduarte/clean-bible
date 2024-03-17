@@ -1,15 +1,23 @@
 import { useContext, useEffect } from "react";
-import { Sun, Moon, EllipsisVertical, AArrowUp, AArrowDown } from "lucide-react";
+import { History, EllipsisVertical, Sun, Moon, AArrowUp, AArrowDown } from "lucide-react";
 import { db } from "../../models/db";
-import { UserPreferencesContext } from "../../context";
+import { PageContext, UserPreferencesContext } from "../../context";
 import { appDefs } from "../../utils";
-import MenuItem from "../MenuItem";
 import { MenuItemProps } from "../MenuItem/types";
+import { ToolbarProps } from "./types";
+import MenuItem from "../MenuItem";
 import './style.css';
 
-function Toolbar() {
+function Toolbar({setPage}: ToolbarProps) {
+    const pageInfo = useContext(PageContext);
     const userPreferences = useContext(UserPreferencesContext);
     const toolbarMenu = [
+        {
+            id: 'history',
+            title: 'Histórico',
+            icon: <History />,
+            action: toggleHistory
+        },
         {
             id: 'options',
             title: 'Opções',
@@ -20,7 +28,7 @@ function Toolbar() {
                     title: 'Alternar modo claro/escuro',
                     label: 'Mudar para modo ' + (userPreferences.theme == 'light' ? 'escuro' : 'claro'),
                     icon: (userPreferences.theme == 'light') ? <Sun /> : <Moon />,
-                    action: () => { toggleTheme() }
+                    action: toggleTheme
                 },
                 {
                     id: 'increase-font-size',
@@ -62,6 +70,21 @@ function Toolbar() {
             }
         </menu>
     )
+
+    function toggleHistory() {
+        if (pageInfo.page == 'history') {
+            setPage({
+                page: 'read',
+                book: pageInfo.book
+            });
+        }
+        else {
+            setPage({
+                page: 'history',
+                book: pageInfo.book
+            });
+        }
+    }
 
     async function toggleTheme() {
         try {

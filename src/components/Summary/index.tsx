@@ -11,6 +11,7 @@ function Summary({setPage}: SummaryProps) {
 
     return (
         <aside id='summary' className={(pageInfo.page == 'summary' ? '' : 'hidden')}>
+            <h2>Índice</h2>
             {
                 bibleInfo.map((book, bookIndex) => (
                     <AccordionItem

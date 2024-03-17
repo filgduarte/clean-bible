@@ -2,13 +2,13 @@ import { useContext } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { bibleInfo, scrollToTop } from "../../utils";
 import { addToHistory } from "../../models/history";
-import { CurrentReadingContext, PageContext } from "../../context";
+import { PageContext, HistoryContext } from "../../context";
 import { NavbarProps } from "./types";
 import './style.css';
 
 function Navbar({setPage}: NavbarProps) {
     const pageInfo = useContext(PageContext);
-    const currentReading = useContext(CurrentReadingContext);
+    const currentReading = useContext(HistoryContext)[0];
 
     return(
         <nav id='navbar' className={pageInfo.page}>
