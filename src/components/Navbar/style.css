@@ -24,3 +24,7 @@
 #navbar.summary :is(#goto-previous, #goto-next) {
     display: none;
 }
+
+#navbar.history {
+    display: none;
+}

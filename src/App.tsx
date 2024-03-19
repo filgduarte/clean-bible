@@ -1,7 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "./models/db";
 import { UserPreferencesContext, PageContext, HistoryContext } from "./context";
+import { scrollTo } from "./utils";
 import { UserPreferenceOptions, PageInfo, HistoryEntry } from "./types";
 import Options from "./components/Options";
 import Reader from "./components/Reader";
@@ -10,13 +11,12 @@ import Summary from "./components/Summary";
 import History from "./components/History";
 
 function App() {
-    const [page, setPage] = useState<PageInfo>({page: 'read', book: 0});
+    const [pageInfo, setPage] = useState<PageInfo>({page: 'read', book: 0, scrollPosition: 'top'});
     const preferencesResults = useLiveQuery(
         () => db.preferences.toArray()
     );
     const userPreferences: UserPreferenceOptions = {};
     if (preferencesResults) {
-        console.log(preferencesResults)
         preferencesResults.forEach(result => {
             userPreferences[result.option] = result.value;
         });
@@ -41,9 +41,15 @@ function App() {
         })
     }
 
+    useEffect(() => {
+        if ( document.getElementById(pageInfo.page) ) {
+            scrollTo(pageInfo.scrollPosition, pageInfo.page);
+        }
+    }, [pageInfo, history]);
+
     return (
         <UserPreferencesContext.Provider value={userPreferences}>    
-            <PageContext.Provider value={page}>
+            <PageContext.Provider value={pageInfo}>
                 <HistoryContext.Provider value={history}>
 
                 {(preferencesResults && HistoryResult)

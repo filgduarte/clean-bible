@@ -1,5 +1,7 @@
 #history {
+    max-height: 100vh;
     padding: var(--size-regular);
+    overflow-y: scroll;
 }
 
 #history h2 {

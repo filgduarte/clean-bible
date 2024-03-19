@@ -1,16 +1,16 @@
 import { useContext } from "react";
 import { addToHistory } from "../../models/history";
 import { HistoryContext, PageContext } from "../../context";
-import { bibleInfo, scrollToTop } from "../../utils";
+import { bibleInfo } from "../../utils";
 import { HistoryProps } from "./types";
 import './style.css';
 
 function History({setPage}: HistoryProps) {
     const history = useContext(HistoryContext);
-    const currentPage = useContext(PageContext).page;
+    const pageInfo = useContext(PageContext);
     
     return (
-        <aside id='history' className={(currentPage == 'history') ? '' : 'hidden'}>
+        <aside id='history' className={(pageInfo.page == 'history') ? '' : 'hidden'}>
             <h2>Histórico</h2>
             <ul id='history-list'>
                 {
@@ -28,17 +28,28 @@ function History({setPage}: HistoryProps) {
     )
 
     async function onHistoryEntrySelect(selectedBook: number, selectedChapter: number) {
-        addToHistory({
-                book: selectedBook,
-                chapter: selectedChapter,
-        })
-        .then(() => {
+        const currentReading = history[0];
+
+        if (selectedBook == currentReading.book && selectedChapter == currentReading.chapter) {
             setPage({
                 page: 'read',
-                book: selectedBook
+                book: currentReading.book,
+                scrollPosition: 'top'
             });
-            scrollToTop();
-        });
+        }
+        else {
+            await addToHistory({
+                book: selectedBook,
+                chapter: selectedChapter,
+            })
+            .then(() => {
+                setPage({
+                    page: 'read',
+                    book: selectedBook,
+                    scrollPosition: 'top'
+                });
+            });
+        }
     }
 }
 

@@ -37,6 +37,7 @@ export interface CurrentReading {
 export interface PageInfo {
     page: string;
     book: number;
+    scrollPosition: string;
 }
 
 export interface HistoryEntry {

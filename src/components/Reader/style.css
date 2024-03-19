@@ -1,10 +1,10 @@
-#reader {
+#read {
     height: calc(100% - var(--navbars-height));
     padding: var(--size-regular) 2rem;
     overflow-y: auto;
 }
 
-#reader h1 {
+#read h1 {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -13,19 +13,19 @@
     font-size: 1.333em;
 }
 
-#reader h2 {
+#read h2 {
     margin: 0 0 0.5em;
     font-size: 4em;
     text-align: center;
     line-height: 1;
 }
 
-#reader p {
+#read p {
     font-size: 1em;
     margin: 0.5em 0;
 }
 
-#reader small {
+#read small {
     display: inline-flex;
     align-items: center;
     font-weight: bold;

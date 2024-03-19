@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { addToHistory } from "../../models/history";
 import { PageContext } from "../../context";
-import { bibleInfo, scrollToTop } from "../../utils";
+import { bibleInfo } from "../../utils";
 import { SummaryProps } from "./types";
 import AccordionItem from "../AccordionItem";
 import './style.css';
@@ -50,21 +50,22 @@ function Summary({setPage}: SummaryProps) {
     function handleAccordionItemClick(index: number) {
         setPage({
             page: pageInfo.page,
-            book: (index === pageInfo.book) ? -1 : index
+            book: (index === pageInfo.book) ? -1 : index,
+            scrollPosition: 'top'
         });
     }
 
     async function onBookChapterSelect(selectedBook: number, selectedChapter: number) {
         addToHistory({
-                book: selectedBook,
-                chapter: selectedChapter,
+            book: selectedBook,
+            chapter: selectedChapter,
         })
         .then(() => {
             setPage({
                 page: 'read',
-                book: selectedBook
+                book: selectedBook,
+                scrollPosition: 'top'
             });
-            scrollToTop();
         });
     }
 }

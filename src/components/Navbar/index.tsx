@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { addToHistory } from "../../models/history";
 import { PageContext, HistoryContext } from "../../context";
-import { bibleInfo, scrollToTop } from "../../utils";
+import { bibleInfo } from "../../utils";
 import { NavbarProps } from "./types";
 import './style.css';
 
@@ -55,8 +55,7 @@ function Navbar({setPage}: NavbarProps) {
         }
 
         if (previousChapter) {
-            await addToHistory(previousChapter)
-            .then(scrollToTop);
+            await addToHistory(previousChapter);
         }
     }
 
@@ -76,17 +75,16 @@ function Navbar({setPage}: NavbarProps) {
         }
 
         if (nextChapter) {
-            await addToHistory(nextChapter)
-            .then(scrollToTop);
+            await addToHistory(nextChapter);
         }
     }
 
     function handleSummaryClick() {
         setPage({
             page: (pageInfo.page == 'read') ? 'summary' : 'read',
-            book: currentReading.book
+            book: currentReading.book,
+            scrollPosition: `book-selector-${currentReading.book}`
         });
-        scrollToTop();
     }
 }
 

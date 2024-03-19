@@ -89,13 +89,15 @@ function Options({setPage}: OptionsProps) {
         if (pageInfo.page == 'history') {
             setPage({
                 page: 'read',
-                book: pageInfo.book
+                book: pageInfo.book,
+                scrollPosition: 'top'
             });
         }
         else {
             setPage({
                 page: 'history',
-                book: pageInfo.book
+                book: pageInfo.book,
+                scrollPosition: 'top'
             });
         }
         setIsOpen( false );

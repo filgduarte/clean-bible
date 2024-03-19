@@ -80,3 +80,21 @@ export const bibleInfo: BibleInfo = [
 export function scrollToTop() {
     window.scrollTo({ top: 0 });
 }
+
+export function scrollTo(targetId: string, parentId?:string) {
+    const parent = parentId ? document.getElementById(parentId) : window;    
+    
+    if ( ! parent)
+        throw 'Elemento container não encontrado no DOM: ' + parentId;
+
+    if (targetId == 'top') {
+        parent.scrollTo({ top: 0 });
+        return;
+    }
+
+    const target = document.getElementById(targetId);
+
+    if ( ! target )
+        throw 'Elemento alvo não encontrado no DOM: ' + targetId;
+    target.scrollIntoView();
+}
