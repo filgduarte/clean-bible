@@ -15,7 +15,7 @@ Eu poderia procurar por um mais simples? Com certeza, mas achei que seria mais d
 - Escolher modo claro/escuro :heavy_check_mark:
 - Aumentar/reduzir tamanho da fonte :heavy_check_mark:
 - Histórico :heavy_check_mark:
-- Marcador de página
+- Marcador de página :heavy_check_mark:
 
 #### Extras:
 - Escolher versão da Bíblia
@@ -43,7 +43,7 @@ Could I look for a simpler one? Well, definitely, but I thought that would be mo
 - Choose light/dark mode :heavy_check_mark:
 - Increase/decrease font size :heavy_check_mark:
 - History :heavy_check_mark:
-- Page marker
+- Page marker :heavy_check_mark:
 
 #### Extras:
 - Choose Bible version
