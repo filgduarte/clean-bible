@@ -95,14 +95,14 @@ function Options({setPage}: OptionsProps) {
                     ))
                 }
                 </menu>
-                {
-                    bookmark &&
                     <div id='bookmark'>
                         <h3><Bookmark /> Marcador de página:</h3>
+                    {
+                    bookmark &&
                         <button onClick={goToBookmark}>Ir para <span>{bibleInfo[bookmark.book].abbrev} {bookmark.chapter + 1}</span></button>
+                    }
                         <button onClick={moveBookmark}>Marcar esta página</button>
                     </div>
-                }
             </div>
         </aside>
     )

@@ -1,7 +1,9 @@
 #summary {
+    position: relative;
     height: calc(100% - var(--navbars-height));
     padding: var(--size-regular);
     overflow-y: auto;
+    z-index: 8;
 }
 
 #summary h2 {

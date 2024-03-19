@@ -4,6 +4,7 @@
     left: 0;
     width: 100%;
     padding: var(--size-regular);
+    z-index: 9;
 }
 
 #options.active {
@@ -73,6 +74,7 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    padding: var(--size-smallest);
     width: 100%;
 }
 
@@ -83,11 +85,15 @@
 }
 
 #options-panel #bookmark {
-    display: flex;
-    align-items: center;
+    display: grid;
+    grid-template-columns: auto auto;
     gap: var(--size-regular);
     padding-top: var(--size-regular);
     border-top: 1px solid var(--color-primary);
+}
+
+#options-panel #bookmark h3 {
+    grid-column-end: span 2;
 }
 
 #options-panel #bookmark span {

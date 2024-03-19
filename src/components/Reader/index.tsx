@@ -1,15 +1,24 @@
 import { useContext, useState, useEffect } from "react";
+import { Bookmark } from "lucide-react";
 import { UserPreferencesContext, PageContext, HistoryContext } from "../../context";
 import { bibleInfo } from "../../utils";
 import { BibleData } from "./types";
 import './style.css';
 
 function Reader() {
+    const [bibleData, setBibleData] = useState<BibleData>();
+    const [placeholder, setPlaceholder] = useState('Carregando...');
     const userPreferences = useContext(UserPreferencesContext);
     const pageInfo = useContext(PageContext);
     const currentReading = useContext(HistoryContext)[0];
-    const [bibleData, setBibleData] = useState<BibleData>();
-    const [placeholder, setPlaceholder] = useState('Carregando...');
+    let isBookmark = false;
+
+    if (userPreferences.bookmark) {
+        const bookmark = JSON.parse(userPreferences.bookmark);
+
+        if (bookmark.book == currentReading.book && bookmark.chapter == currentReading.chapter)
+            isBookmark = true;
+    }
 
     useEffect(() => {
         const params = {
@@ -33,6 +42,12 @@ function Reader() {
 
     return (
         <main id='read' className={(pageInfo.page == 'read') ? '' : 'hidden'} style={{fontSize: userPreferences.fontSize + 'rem'}}>
+            {
+                isBookmark &&
+                    <div id='bookmark-tag'>
+                        <Bookmark />
+                    </div>
+            }
             <h1>{bibleInfo[currentReading.book].name}</h1>
             <h2>{currentReading.chapter + 1}</h2>
             {

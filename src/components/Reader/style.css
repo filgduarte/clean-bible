@@ -31,3 +31,19 @@
     font-weight: bold;
     color: color-mix(in srgb, var(--color-secondary) 25%, var(--color-foreground));
 }
+
+#bookmark-tag {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: var(--size-regular);
+    width: calc(var(--size-largest) * 1.5);
+    aspect-ratio: 1;
+    color: var(--color-accent);
+}
+
+#bookmark-tag path {
+    stroke: none;
+    fill: currentColor;
+}
