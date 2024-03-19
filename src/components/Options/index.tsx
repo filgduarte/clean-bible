@@ -1,14 +1,26 @@
 import { useContext, useState, useEffect } from "react";
-import { EllipsisVertical, X, History, BookOpenText, Sun, Moon, AArrowUp, AArrowDown } from "lucide-react";
+import {
+    EllipsisVertical,
+    X,
+    History,
+    BookOpenText,
+    Sun,
+    Moon,
+    AArrowUp,
+    AArrowDown,
+    Bookmark
+} from "lucide-react";
 import { db } from "../../models/db";
-import { PageContext, UserPreferencesContext } from "../../context";
-import { appDefs } from "../../utils";
+import { addToHistory } from "../../models/history";
+import { PageContext, UserPreferencesContext, HistoryContext } from "../../context";
+import { appDefs, bibleInfo } from "../../utils";
 import { OptionsProps } from "./types";
 import './style.css';
 
 function Options({setPage}: OptionsProps) {
     const pageInfo = useContext(PageContext);
     const userPreferences = useContext(UserPreferencesContext);
+    const history = useContext(HistoryContext);
     const [isOpen, setIsOpen] = useState(false);
     const optionsItems = [
         {
@@ -38,8 +50,10 @@ function Options({setPage}: OptionsProps) {
             label: (pageInfo.page != 'history') ? 'Histórico' : 'Leitura',
             icon: (pageInfo.page != 'history') ? <History /> : <BookOpenText />,
             action: toggleHistory
-        }
+        },
     ];
+
+    const bookmark = userPreferences.bookmark ? JSON.parse(userPreferences.bookmark) : undefined;
 
     useEffect(() => {
         switch (userPreferences.theme) {
@@ -81,6 +95,14 @@ function Options({setPage}: OptionsProps) {
                     ))
                 }
                 </menu>
+                {
+                    bookmark &&
+                    <div id='bookmark'>
+                        <h3><Bookmark /> Marcador de página:</h3>
+                        <button onClick={goToBookmark}>Ir para <span>{bibleInfo[bookmark.book].abbrev} {bookmark.chapter + 1}</span></button>
+                        <button onClick={moveBookmark}>Marcar esta página</button>
+                    </div>
+                }
             </div>
         </aside>
     )
@@ -142,6 +164,48 @@ function Options({setPage}: OptionsProps) {
                 console.log(err);
             }
         }
+    }
+
+    async function moveBookmark() {
+        const bookmark = {
+            book: history[0].book,
+            chapter: history[0].chapter
+        }
+        const bookmarkJson = JSON.stringify(bookmark);
+        try {
+            await db.preferences.put({
+                option: 'bookmark',
+                value: bookmarkJson,
+            });
+        }
+        catch(err) {
+            console.log(err);
+        }
+        setIsOpen( false );
+    }
+
+    async function goToBookmark() {
+        if (bookmark.book == history[0].book && bookmark.chapter == history[0].chapter) {
+            setPage({
+                page: 'read',
+                book: bookmark.book,
+                scrollPosition: 'top'
+            });
+        }
+        else {
+            await addToHistory({
+                book: bookmark.book,
+                chapter: bookmark.chapter,
+            })
+            .then(() => {
+                setPage({
+                    page: 'read',
+                    book: bookmark.book,
+                    scrollPosition: 'top'
+                });
+            });
+        }
+        setIsOpen( false );
     }
 }
 

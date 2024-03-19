@@ -11,6 +11,29 @@
     border-bottom: 1px solid var(--color-secondary);
 }
 
+#options h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    height: calc(var(--size-largest) * 1.5);
+}
+
+#options h3 {
+    display: flex;
+    align-items: center;
+    gap: var(--size-smallest);
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+#options button {
+    font-size: 1em;
+    line-height: 1.1;
+    border: 1px solid var(--color-secondary);
+}
+
 #options #toggle-options {
     display: flex;
     justify-content: center;
@@ -34,13 +57,6 @@
     display: block;
 }
 
-#options h2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    height: calc(var(--size-largest) * 1.5);
-}
 
 #options-menu {
     display: grid;
@@ -58,13 +74,22 @@
     justify-content: space-around;
     align-items: center;
     width: 100%;
-    font-size: 1em;
-    line-height: 1.1;
-    border: 1px solid var(--color-secondary);
 }
 
 #options-menu .lucide {
     width: var(--size-largest);
     height: var(--size-largest);
     color: var(--color-primary);
+}
+
+#options-panel #bookmark {
+    display: flex;
+    align-items: center;
+    gap: var(--size-regular);
+    padding-top: var(--size-regular);
+    border-top: 1px solid var(--color-primary);
+}
+
+#options-panel #bookmark span {
+    text-transform: capitalize;
 }
