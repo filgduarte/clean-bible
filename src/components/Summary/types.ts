@@ -1,5 +1,12 @@
-import { PageInfo } from "../../types";
+import { MutableRefObject } from "react";
+import { ChangePage } from "../../types";
 
 export interface SummaryProps {
-    setPage: (value: PageInfo) => void | ((value: (prev: PageInfo) => PageInfo) => void);
+    changePage: ChangePage;
+    myRef: MutableRefObject<HTMLDivElement | null> | null;
+}
+
+export interface TestamentBooks {
+    index: number;
+    name: string;
 }

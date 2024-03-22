@@ -2,8 +2,6 @@ import { useContext, useState, useEffect } from "react";
 import {
     EllipsisVertical,
     X,
-    History,
-    BookOpenText,
     Sun,
     Moon,
     AArrowUp,
@@ -12,13 +10,12 @@ import {
 } from "lucide-react";
 import { db } from "../../models/db";
 import { addToHistory } from "../../models/history";
-import { PageContext, UserPreferencesContext, HistoryContext } from "../../context";
+import { UserPreferencesContext, HistoryContext } from "../../context";
 import { appDefs, bibleInfo } from "../../utils";
 import { OptionsProps } from "./types";
 import './style.css';
 
-function Options({setPage}: OptionsProps) {
-    const pageInfo = useContext(PageContext);
+function Options({changePage}: OptionsProps) {
     const userPreferences = useContext(UserPreferencesContext);
     const history = useContext(HistoryContext);
     const [isOpen, setIsOpen] = useState(false);
@@ -44,13 +41,6 @@ function Options({setPage}: OptionsProps) {
             icon: <AArrowDown />,
             action: () => { changeFontSize('decrease') }
         },
-        {
-            id: 'toggle-history',
-            title: 'Ir para ' + (pageInfo.page != 'history') ? 'Histórico' : 'Leitura',
-            label: (pageInfo.page != 'history') ? 'Histórico' : 'Leitura',
-            icon: (pageInfo.page != 'history') ? <History /> : <BookOpenText />,
-            action: toggleHistory
-        },
     ];
 
     const bookmark = userPreferences.bookmark ? JSON.parse(userPreferences.bookmark) : undefined;
@@ -69,7 +59,7 @@ function Options({setPage}: OptionsProps) {
     }, [userPreferences.theme]);
 
     return (
-        <aside id='options' className={isOpen ? 'active' : ''}>
+        <section id='options' className={isOpen ? 'active' : ''}>
             <button
                 id='toggle-options'
                 title='Abrir menu de opções'
@@ -78,7 +68,7 @@ function Options({setPage}: OptionsProps) {
                 {isOpen ? <X /> : <EllipsisVertical />}
             </button>
             <div id='options-panel'>
-                <h2>Opções</h2>
+                <h1>Opções</h1>
                 <menu id='options-menu'>
                 {
                     optionsItems.map((option, index) => (
@@ -104,26 +94,8 @@ function Options({setPage}: OptionsProps) {
                         <button onClick={moveBookmark}>Marcar esta página</button>
                     </div>
             </div>
-        </aside>
+        </section>
     )
-
-    function toggleHistory() {
-        if (pageInfo.page == 'history') {
-            setPage({
-                page: 'read',
-                book: pageInfo.book,
-                scrollPosition: 'top'
-            });
-        }
-        else {
-            setPage({
-                page: 'history',
-                book: pageInfo.book,
-                scrollPosition: 'top'
-            });
-        }
-        setIsOpen( false );
-    }
 
     async function switchTheme() {
         try {
@@ -186,24 +158,14 @@ function Options({setPage}: OptionsProps) {
 
     async function goToBookmark() {
         if (bookmark.book == history[0].book && bookmark.chapter == history[0].chapter) {
-            setPage({
-                page: 'read',
-                book: bookmark.book,
-                scrollPosition: 'top'
-            });
+            changePage('read', bookmark.book, 'top');
         }
         else {
             await addToHistory({
                 book: bookmark.book,
                 chapter: bookmark.chapter,
             })
-            .then(() => {
-                setPage({
-                    page: 'read',
-                    book: bookmark.book,
-                    scrollPosition: 'top'
-                });
-            });
+            .then(() => changePage('read', bookmark.book, 'top'));
         }
         setIsOpen( false );
     }

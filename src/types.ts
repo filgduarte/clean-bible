@@ -1,3 +1,5 @@
+import { MutableRefObject } from "react";
+
 export interface AppDefs {
     pages: string[];
     languages: string[];
@@ -45,3 +47,17 @@ export interface HistoryEntry {
     book: number;
     chapter: number;
 }
+
+export interface Refs {
+    reader: MutableRefObject<HTMLDivElement | null> | null;
+    summary: MutableRefObject<HTMLDivElement | null> | null;
+}
+
+export interface PageComponent {
+    [key: string]: JSX.Element;
+}
+
+export type ChangePage = (
+    targetPage: string,
+    targetBook?: number,
+    targetScroll?: string) => void;

@@ -1,17 +1,11 @@
-#summary {
-    position: relative;
-    height: calc(100% - var(--navbars-height));
-    padding: var(--size-regular);
-    overflow-y: auto;
-    z-index: 8;
+#summary h1 {
+    margin-bottom: 1rem;
 }
 
-#summary h2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+#summary .testament-books {
     margin: 0;
-    height: calc(var(--size-largest) * 1.5);
+    padding: 0;
+    list-style-type: none;
 }
 
 #summary.accordion-item  {
@@ -19,28 +13,32 @@
     padding: 0;
 }
 
-#summary .accordion-item h3 {
+#summary .accordion-item h2 {
     margin: 0;
     font-size: 1rem;
     font-weight: 600;
 }
 
-#summary .accordion-item h3 button {
-    padding: var(--size-small) var(--size-regular);
+#summary .accordion-item h2 button {
+    padding: var(--size-small) 0;
     width: 100%;
     text-align: left;
     background-color: transparent;
     border: none;
 }
 
+#summary .accordion-item.open h2 button {
+    font-weight: bold;
+}
+
 #summary .accordion-item section {
     display: none;
-    padding: 0 var(--size-regular);
+    padding: 0;
     margin-bottom: var(--size-regular);
 }
 
 #summary .accordion-item.open section {
-    --_chapter-button-size: calc(var(--navbars-height) * 0.75);
+    --_chapter-button-size: calc(var(--navbar-height) * 0.75);
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(var(--_chapter-button-size), 1fr));
     gap: var(--size-smallest);
@@ -50,6 +48,6 @@
     width: var(--_chapter-button-size);
     height: var(--_chapter-button-size);
     padding: var(--size-small);
-    background-color: transparent;
+    background-color: var(--color-primary-shade-2);
     border: 1px solid var(--color-secondary);
 }

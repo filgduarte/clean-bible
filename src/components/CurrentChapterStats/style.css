@@ -1,0 +1,18 @@
+#chapter-count {
+    text-align: right;
+}
+
+#navbar #current-chapter-stats .progress-container {
+    position: absolute;
+    bottom: calc(var(--size-smallest) / -2.7);
+    width: calc(100% - (var(--size-large) * 2));
+    height: calc(var(--size-smallest) / 2.7);
+    background-color: color-mix(in srgb, var(--color-primary-shade-1) 75%, transparent);
+    border-radius: calc(var(--size-smallest) / 2.7);
+}
+
+#current-chapter-stats .progress-bar {
+    height: 100%;
+    background-color: var(--color-primary);
+    border-radius: calc(var(--size-smallest) / 2.7);
+}

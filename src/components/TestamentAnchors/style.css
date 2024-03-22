@@ -1,0 +1,37 @@
+#testament-anchors::before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: calc(var(--size-smallest) / -2.7);
+    width: calc(100% - (var(--size-large) * 2));
+    height: calc(var(--size-smallest) / 2.7);
+    background-color: color-mix(in srgb, var(--color-primary-shade-1) 75%, transparent);
+    border-radius: calc(var(--size-smallest) / 2.7);
+}
+
+#testament-anchors a {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    color: var(--color-foreground);
+    text-decoration: none;
+    opacity: 0.67;
+}
+
+#testament-anchors a.active {
+    opacity: 1;
+}
+
+#testament-anchors a.active::before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: calc(var(--size-smallest) / -2.7);
+    width: 100%;
+    height: calc(var(--size-smallest) / 2.7);
+    background-color: var(--color-primary);
+    border-radius: calc(var(--size-smallest) / 2.7);
+}

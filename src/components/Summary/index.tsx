@@ -2,32 +2,72 @@ import { useContext } from "react";
 import { addToHistory } from "../../models/history";
 import { PageContext } from "../../context";
 import { bibleInfo } from "../../utils";
-import { SummaryProps } from "./types";
+import { SummaryProps, TestamentBooks } from "./types";
 import AccordionItem from "../AccordionItem";
 import './style.css';
 
-function Summary({setPage}: SummaryProps) {
+function Summary({changePage, myRef}: SummaryProps) {
     const pageInfo = useContext(PageContext);
+    const oldTestamentBooks: TestamentBooks[] = [];
+    const newTestamentBooks: TestamentBooks[] = [];
+
+    bibleInfo.forEach((bookInfo, index) => {
+        if (bookInfo.testament == 0) {
+            oldTestamentBooks.push({
+                index: index,
+                name: bookInfo.name
+            });
+        }
+        else {
+            newTestamentBooks.push({
+                index: index,
+                name: bookInfo.name
+            });
+        }
+    })
 
     return (
-        <aside id='summary' className={(pageInfo.page == 'summary' ? '' : 'hidden')}>
-            <h2>Índice</h2>
+        <section ref={myRef} id='summary' className={(pageInfo.page == 'summary' ? '' : 'hidden')}>
+            <h1>Índice</h1>
+            <ul id='testament-0' className='testament-books'>
             {
-                bibleInfo.map((book, bookIndex) => (
-                    <AccordionItem
-                        id={`book-selector-${bookIndex}`}
-                        title={book.name}
-                        active={bookIndex == pageInfo.book}
-                        onClick={() => handleAccordionItemClick(bookIndex)}
-                        key={bookIndex}
-                    >
-                        {
-                            createChaptersButtons(bookIndex)
-                        }
-                    </AccordionItem>
+                oldTestamentBooks.map((book, index) => (
+                    <li className="book" key={index}>
+                        <AccordionItem
+                            id={`book-selector-${book.index}`}
+                            title={book.name}
+                            active={book.index == pageInfo.book}
+                            onClick={() => handleAccordionItemClick(book.index)}
+                            key={index}
+                        >
+                            {
+                                createChaptersButtons(book.index)
+                            }
+                        </AccordionItem>
+                    </li>
                 ))
             }
-        </aside>
+            </ul>
+            <ul id='testament-1' className='testament-books'>
+            {
+                newTestamentBooks.map((book, index) => (
+                    <li className="book" key={index}>
+                        <AccordionItem
+                            id={`book-selector-${book.index}`}
+                            title={book.name}
+                            active={book.index == pageInfo.book}
+                            onClick={() => handleAccordionItemClick(book.index)}
+                            key={index}
+                        >
+                            {
+                                createChaptersButtons(book.index)
+                            }
+                        </AccordionItem>
+                    </li>
+                ))
+            }
+            </ul>
+        </section>
     )
 
     function createChaptersButtons(bookIndex: number) {
@@ -48,11 +88,11 @@ function Summary({setPage}: SummaryProps) {
     }
 
     function handleAccordionItemClick(index: number) {
-        setPage({
-            page: pageInfo.page,
-            book: (index === pageInfo.book) ? -1 : index,
-            scrollPosition: 'top'
-        });
+        const targetPage = pageInfo.page;
+        const targetBook = (index === pageInfo.book) ? -1 : index
+        const targetScroll = 'top';
+
+        changePage(targetPage, targetBook, targetScroll);
     }
 
     async function onBookChapterSelect(selectedBook: number, selectedChapter: number) {
@@ -60,13 +100,7 @@ function Summary({setPage}: SummaryProps) {
             book: selectedBook,
             chapter: selectedChapter,
         })
-        .then(() => {
-            setPage({
-                page: 'read',
-                book: selectedBook,
-                scrollPosition: 'top'
-            });
-        });
+        .then(() => changePage('read', selectedBook, 'top'));
     }
 }
 

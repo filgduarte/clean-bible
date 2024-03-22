@@ -1,15 +1,5 @@
-#history {
-    max-height: 100vh;
-    padding: var(--size-regular);
-    overflow-y: scroll;
-}
-
-#history h2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    height: calc(var(--size-largest) * 1.5);
+#history h1 {
+    margin-bottom: 1rem;
 }
 
 #history-list {
@@ -23,7 +13,7 @@
     justify-content: space-between;
     align-items: center;
     margin: 0;
-    padding: var(--size-small) var(--size-regular);
+    padding: var(--size-small) 0;
     width: 100%;
 }
 

@@ -5,13 +5,13 @@ import { bibleInfo } from "../../utils";
 import { HistoryProps } from "./types";
 import './style.css';
 
-function History({setPage}: HistoryProps) {
+function History({changePage}: HistoryProps) {
     const history = useContext(HistoryContext);
     const pageInfo = useContext(PageContext);
     
     return (
-        <aside id='history' className={(pageInfo.page == 'history') ? '' : 'hidden'}>
-            <h2>Histórico</h2>
+        <section id='history' className={(pageInfo.page == 'history') ? '' : 'hidden'}>
+            <h1>Histórico</h1>
             <ul id='history-list'>
                 {
                     history.map( (entry, index) => (
@@ -24,31 +24,21 @@ function History({setPage}: HistoryProps) {
                     ))
                 }
             </ul>
-        </aside>
+        </section>
     )
 
     async function onHistoryEntrySelect(selectedBook: number, selectedChapter: number) {
         const currentReading = history[0];
 
         if (selectedBook == currentReading.book && selectedChapter == currentReading.chapter) {
-            setPage({
-                page: 'read',
-                book: currentReading.book,
-                scrollPosition: 'top'
-            });
+            changePage('read', currentReading.book, 'top');
         }
         else {
             await addToHistory({
                 book: selectedBook,
                 chapter: selectedChapter,
             })
-            .then(() => {
-                setPage({
-                    page: 'read',
-                    book: selectedBook,
-                    scrollPosition: 'top'
-                });
-            });
+            .then(() => changePage('read', selectedBook, 'top'));
         }
     }
 }

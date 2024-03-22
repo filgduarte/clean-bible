@@ -2,15 +2,15 @@ import { useContext, useState, useEffect } from "react";
 import { Bookmark } from "lucide-react";
 import { UserPreferencesContext, PageContext, HistoryContext } from "../../context";
 import { bibleInfo } from "../../utils";
-import { BibleData } from "./types";
+import { ReaderProps, BibleData } from "./types";
 import './style.css';
 
-function Reader() {
-    const [bibleData, setBibleData] = useState<BibleData>();
-    const [placeholder, setPlaceholder] = useState('Carregando...');
+function Reader({myRef}: ReaderProps) {
     const userPreferences = useContext(UserPreferencesContext);
     const pageInfo = useContext(PageContext);
     const currentReading = useContext(HistoryContext)[0];
+    const [bibleData, setBibleData] = useState<BibleData>();
+    const [placeholder, setPlaceholder] = useState('Carregando...');
     let isBookmark = false;
 
     if (userPreferences.bookmark) {
@@ -41,25 +41,34 @@ function Reader() {
     }, [userPreferences.version]);
 
     return (
-        <main id='read' className={(pageInfo.page == 'read') ? '' : 'hidden'} style={{fontSize: userPreferences.fontSize + 'rem'}}>
-            {
-                isBookmark &&
-                    <div id='bookmark-tag'>
-                        <Bookmark />
-                    </div>
-            }
-            <h1>{bibleInfo[currentReading.book].name}</h1>
-            <h2>{currentReading.chapter + 1}</h2>
+        <main
+            id='read'
+            className={(pageInfo.page == 'read') ? '' : 'hidden'}
+            style={{fontSize: userPreferences.fontSize + 'rem'}}
+            ref={myRef}
+        >
+            <div id='bookmark-tag' className={isBookmark ? 'active' : ''}>
+                <Bookmark />
+            </div>
+            <h1>
+                {bibleInfo[currentReading.book].name} {currentReading.chapter + 1}
+            </h1>
             {
                 bibleData
-                ? bibleData.texts[currentReading.book][currentReading.chapter]
+                ?
+                <ol>
+                    {bibleData.texts[currentReading.book][currentReading.chapter]
                     .map((verse, index) => (
-                        <p key={index}>
-                            <small>{index + 1}</small> {verse}
-                        </p>
-                    ))
+                        <li key={index}>
+                            {verse}
+                        </li>
+                    ))}
+                </ol>
                 : placeholder
             }
+            <p className='copyright'>
+                {bibleData?.copyright}
+            </p>
         </main>
     )
 }

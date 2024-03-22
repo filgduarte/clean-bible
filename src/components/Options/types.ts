@@ -1,5 +1,5 @@
-import { PageInfo } from "../../types";
+import { ChangePage } from "../../types";
 
 export interface OptionsProps {
-    setPage: (value: PageInfo) => void;
+    changePage: ChangePage;
 }

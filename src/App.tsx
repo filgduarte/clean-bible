@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "./models/db";
-import { UserPreferencesContext, PageContext, HistoryContext } from "./context";
-import { scrollTo } from "./utils";
+import { UserPreferencesContext, PageContext, HistoryContext, RefContext } from "./context";
+import { appDefs, scrollTo } from "./utils";
 import { UserPreferenceOptions, PageInfo, HistoryEntry } from "./types";
 import Options from "./components/Options";
 import Reader from "./components/Reader";
@@ -11,7 +11,11 @@ import Summary from "./components/Summary";
 import History from "./components/History";
 
 function App() {
-    const [pageInfo, setPage] = useState<PageInfo>({page: 'read', book: 0, scrollPosition: 'top'});
+    const refs = {
+        reader: useRef(null),
+        summary: useRef(null)
+    }
+    const [pageInfo, setPageInfo] = useState<PageInfo>({page: 'read', book: 0, scrollPosition: 'top'});
     const preferencesResults = useLiveQuery(
         () => db.preferences.toArray()
     );
@@ -51,26 +55,42 @@ function App() {
         <UserPreferencesContext.Provider value={userPreferences}>    
             <PageContext.Provider value={pageInfo}>
                 <HistoryContext.Provider value={history}>
+                    <RefContext.Provider value={refs}>
 
-                {(preferencesResults && HistoryResult)
-                    ?
-                        <div id='bible'>
-                            <Options setPage={setPage} />
-                            <Reader />
-                            <Navbar setPage={setPage} />
-                            <Summary setPage={setPage} />
-                            <History setPage={setPage} />
-                        </div>
-                    :
-                        <div id='loading'>
-                            Carregando...
-                        </div>
-                }
+                        {(preferencesResults && HistoryResult)
+                            ?
+                                <div id='bible'>
+                                    <Reader myRef={refs.reader} />
+                                    <Summary changePage={changePage} myRef={refs.summary} />
+                                    <History changePage={changePage} />
+                                    {/* <Options changePage={changePage} /> */}
+                                    <Navbar changePage={changePage} />
+                                </div>
+                            :
+                                <div id='loading'>
+                                    Carregando...
+                                </div>
+                        }
 
+                    </RefContext.Provider>
                 </HistoryContext.Provider>
             </PageContext.Provider>
         </UserPreferencesContext.Provider>
     )
+
+    function changePage(
+        targetPage: string,
+        targetBook: number = pageInfo.book,
+        targetScroll: string = 'top'
+    ) {
+        if ( appDefs.pages.includes(targetPage) ) {
+            setPageInfo({
+                page: targetPage,
+                book: targetBook,
+                scrollPosition: targetScroll
+            });
+        }
+    }
 }
 
 export default App;

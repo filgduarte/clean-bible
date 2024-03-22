@@ -1,7 +1,7 @@
 import { AppDefs, BibleInfo } from "./types";
 
 export const appDefs: AppDefs = {
-    pages: [ 'read', 'summary', 'history' ],
+    pages: [ 'read', 'summary', 'history', 'options' ],
     languages: [ 'pt' ],
     bibleVersions: [ 'blivre' ],
     fontSizeLimit: { min: 1, max: 2 },
