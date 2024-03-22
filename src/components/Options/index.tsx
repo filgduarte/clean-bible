@@ -1,49 +1,26 @@
 import { useContext, useState, useEffect } from "react";
 import {
-    EllipsisVertical,
-    X,
     Sun,
     Moon,
     AArrowUp,
     AArrowDown,
-    Bookmark
 } from "lucide-react";
 import { db } from "../../models/db";
 import { addToHistory } from "../../models/history";
-import { UserPreferencesContext, HistoryContext } from "../../context";
+import { UserPreferencesContext, PageContext, HistoryContext } from "../../context";
 import { appDefs, bibleInfo } from "../../utils";
 import { OptionsProps } from "./types";
 import './style.css';
 
 function Options({changePage}: OptionsProps) {
     const userPreferences = useContext(UserPreferencesContext);
+    const currentPage = useContext(PageContext).page;
     const history = useContext(HistoryContext);
-    const [isOpen, setIsOpen] = useState(false);
-    const optionsItems = [
-        {
-            id: 'switch-theme',
-            title: 'Mudar para modo ' + (userPreferences.theme == 'light' ? 'escuro' : 'claro'),
-            label: 'Modo ' + (userPreferences.theme == 'light' ? 'escuro' : 'claro'),
-            icon: (userPreferences.theme == 'light') ? <Moon /> : <Sun />,
-            action: switchTheme
-        },
-        {
-            id: 'increase-font-size',
-            title: 'Aumentar tamanho do texto',
-            label: 'Letras maiores',
-            icon: <AArrowUp />,
-            action: () => { changeFontSize('increase') }
-        },
-        {
-            id: 'decrease-font-size',
-            title: 'Diminuir tamanho do texto',
-            label: 'Letras menores',
-            icon: <AArrowDown />,
-            action: () => { changeFontSize('decrease') }
-        },
-    ];
 
-    const bookmark = userPreferences.bookmark ? JSON.parse(userPreferences.bookmark) : undefined;
+    const [options, setOptions] = useState({
+        bibleVersion: userPreferences.bibleVersion,
+        theme: userPreferences.theme
+    });
 
     useEffect(() => {
         switch (userPreferences.theme) {
@@ -59,65 +36,129 @@ function Options({changePage}: OptionsProps) {
     }, [userPreferences.theme]);
 
     return (
-        <section id='options' className={isOpen ? 'active' : ''}>
-            <button
-                id='toggle-options'
-                title='Abrir menu de opções'
-                onClick={() => { setIsOpen( ! isOpen )}}
-            >
-                {isOpen ? <X /> : <EllipsisVertical />}
-            </button>
-            <div id='options-panel'>
-                <h1>Opções</h1>
-                <menu id='options-menu'>
-                {
-                    optionsItems.map((option, index) => (
-                        <li className='option-item' key={index}>
-                            <button
-                                id={option.id}
-                                title={option.title}
-                                onClick={option.action}
+        <section id='options'  className={(currentPage == 'options') ? '' : 'hidden'}>
+            <h1>Opções</h1>
+            <dl id='options-menu'>
+                <dt className='option-version'>Versão da Bíblia</dt>
+                <dd className='option-version'>
+                    <select
+                        id='bible-version'
+                        name='bible-version'
+                        value={options.bibleVersion}
+                        onChange={handleVersionChange}
+                    >
+                        {
+                            appDefs.bibleVersions.map((version, index) => (
+                                <option
+                                    value={version}
+                                    key={index}
                                 >
-                                {option.icon}
-                                {option.label}
-                            </button>
-                        </li>
-                    ))
-                }
-                </menu>
-                    <div id='bookmark'>
-                        <h3><Bookmark /> Marcador de página:</h3>
-                    {
-                    bookmark &&
-                        <button onClick={goToBookmark}>Ir para <span>{bibleInfo[bookmark.book].abbrev} {bookmark.chapter + 1}</span></button>
-                    }
-                        <button onClick={moveBookmark}>Marcar esta página</button>
+                                    {version}
+                                </option>
+                            ))
+                        }
+                    </select>
+                </dd>
+
+                <dt className='option-theme'>Tema</dt>
+                <dd className='option-theme'>
+                    <div className='option-group'>
+                        <label htmlFor='theme-light'>
+                            <Sun />
+                        </label>
+                        <input
+                            type='radio'
+                            id='theme-light'
+                            name='theme'
+                            value='light'
+                            checked={options.theme == 'light'}
+                            onChange={handleThemeChange}
+                        />
                     </div>
-            </div>
+                    <div className='option-group'>
+                        <label htmlFor="theme-dark">
+                            <Moon />
+                        </label>
+                        <input
+                            type='radio'
+                            id='theme-dark'
+                            name='theme'
+                            value='dark'
+                            checked={options.theme == 'dark'}
+                            onChange={handleThemeChange}
+                        />
+                    </div>
+                </dd>
+
+                <dt className='option-size'>Tamanho do texto</dt>
+                <dd className='option-size'>
+                    <button
+                        id='decrease-font-size'
+                        title='Diminuir tamanho do texto'
+                        disabled={parseFloat(userPreferences.fontSize) <= appDefs.fontSizeLimit.min}
+                        onClick={() => handleFontSizeChange('decrease')}
+                    >
+                        <AArrowDown />
+                    </button>
+                    <button
+                        id='increase-font-size'
+                        title='Aumentar tamanho do texto'
+                        disabled={parseFloat(userPreferences.fontSize) >= appDefs.fontSizeLimit.max}
+                        onClick={() => handleFontSizeChange('increase')}
+                    >
+                        <AArrowUp />
+                    </button>
+                </dd>
+            </dl>
         </section>
     )
 
-    async function switchTheme() {
+    async function handleVersionChange(event: React.FormEvent) {
+        const selectElement = event.target as HTMLSelectElement;
+
         try {
             await db.preferences.put({
-                option: 'theme',
-                value: (userPreferences.theme == 'light') ? 'dark' : 'light',
+                option: 'bibleVersion',
+                value: selectElement.value,
             });
+
+            setOptions(prev => ({
+                ...prev,
+                bibleVersion: selectElement.value,
+            }));
         }
         catch(err) {
             console.log(err);
         }
     }
 
-    async function changeFontSize(action: string) {
+    async function handleThemeChange(event: React.FormEvent) {
+        const radioElement = event.target as HTMLInputElement;
+        try {
+            await db.preferences.put({
+                option: 'theme',
+                value: radioElement.value,
+            });
+
+            setOptions(prev => ({
+                ...prev,
+                theme: radioElement.value,
+            }));
+        }
+        catch(err) {
+            console.log(err);
+        }
+    }
+
+    async function handleFontSizeChange(action: string) {
         const currentFontSize = parseFloat(userPreferences.fontSize);
         let nextFontSize = currentFontSize;
 
         if (action == 'increase' && currentFontSize < appDefs.fontSizeLimit.max) {
-            nextFontSize = ( (currentFontSize * 10) + 2) / 10;
+            nextFontSize = ( (currentFontSize * 10) + 1) / 10;
         }
         else if (action == 'decrease' && currentFontSize > appDefs.fontSizeLimit.min) {
-            nextFontSize = ( (currentFontSize * 10) - 2) / 10;
+            nextFontSize = ( (currentFontSize * 10) - 1) / 10;
         }
 
         if (
@@ -136,38 +177,6 @@ function Options({changePage}: OptionsProps) {
                 console.log(err);
             }
         }
-    }
-
-    async function moveBookmark() {
-        const bookmark = {
-            book: history[0].book,
-            chapter: history[0].chapter
-        }
-        const bookmarkJson = JSON.stringify(bookmark);
-        try {
-            await db.preferences.put({
-                option: 'bookmark',
-                value: bookmarkJson,
-            });
-        }
-        catch(err) {
-            console.log(err);
-        }
-        setIsOpen( false );
-    }
-
-    async function goToBookmark() {
-        if (bookmark.book == history[0].book && bookmark.chapter == history[0].chapter) {
-            changePage('read', bookmark.book, 'top');
-        }
-        else {
-            await addToHistory({
-                book: bookmark.book,
-                chapter: bookmark.chapter,
-            })
-            .then(() => changePage('read', bookmark.book, 'top'));
-        }
-        setIsOpen( false );
     }
 }
 

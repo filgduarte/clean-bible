@@ -45,7 +45,6 @@ function Reader({myRef}: ReaderProps) {
         <main
             id='read'
             className={(pageInfo.page == 'read') ? '' : 'hidden'}
-            style={{fontSize: userPreferences.fontSize + 'rem'}}
             ref={myRef}
             onClick={e => handleReaderClick(e)}
         >

@@ -1,101 +1,68 @@
-#options {
-    position: fixed;
+#options dl {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--size-regular) 0;
+}
+
+#options :is(dt, dd) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--size-small);
+}
+
+#options :is(input, select, button, .option-group) {
+    padding: 0 var(--size-small);
+    margin: 0;
+    min-width: calc(var(--size-largest) * 2);
+    height: calc(var(--size-largest) * 1.2);
+    background: var(--color-primary-shade-2);
+    border: none;
+    border-radius: var(--size-small);
+}
+
+#options select {
+    width: 100%;
+    font-family: inherit;
+    font-size: var(--size-regular);
+    text-transform: uppercase;
+    color: var(--color-foreground);
+}
+
+#options input {
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    padding: var(--size-regular);
-    z-index: 9;
 }
 
-#options.active {
-    background-color: var(--color-background);
-    border-bottom: 1px solid var(--color-secondary);
+#options button:disabled {
+    color: var(--color-primary-shade-1);
 }
 
-#options h2 {
+.option-theme .option-group {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0;
-    height: calc(var(--size-largest) * 1.5);
-}
-
-#options h3 {
-    display: flex;
-    align-items: center;
-    gap: var(--size-smallest);
-    margin: 0;
-    font-size: 1rem;
-    font-weight: 600;
-}
-
-#options button {
-    font-size: 1em;
-    line-height: 1.1;
-    border: 1px solid var(--color-secondary);
-}
-
-#options #toggle-options {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: var(--size-regular);
-    right: var(--size-regular);
-    width: calc(var(--size-largest) * 1.5);
-    aspect-ratio: 1;
-    padding: 0;
-    background-color: var(--color-background);
-    border: 1px solid var(--color-secondary);
-    border-radius: var(--size-largest);
-}
-
-#options-panel {
-    display: none;
-}
-
-#options.active #options-panel {
-    display: block;
-}
-
-
-#options-menu {
-    display: grid;
-    margin: 0;
-    padding: var(--size-regular) 0;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--size-regular);
-    list-style-type: none;
-}
-
-#options-menu button {
-    aspect-ratio: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    padding: var(--size-smallest);
+    position: relative;
     width: 100%;
+    color: var(--color-foreground);
+    background-color: var(--color-primary-shade-2);
+    border-radius: var(--size-small);
 }
 
-#options-menu .lucide {
-    width: var(--size-largest);
-    height: var(--size-largest);
-    color: var(--color-primary);
+.option-theme input {
+    opacity: 0;
 }
 
-#options-panel #bookmark {
-    display: grid;
-    grid-template-columns: auto auto;
-    gap: var(--size-regular);
-    padding-top: var(--size-regular);
-    border-top: 1px solid var(--color-primary);
+#options .option-theme .option-group:has(input:checked) {
+    background-color: var(--color-primary)
 }
 
-#options-panel #bookmark h3 {
-    grid-column-end: span 2;
-}
-
-#options-panel #bookmark span {
-    text-transform: capitalize;
+.option-theme label,
+.option-size button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }

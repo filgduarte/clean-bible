@@ -59,11 +59,11 @@ function App() {
 
                         {(preferencesResults && HistoryResult)
                             ?
-                                <div id='bible'>
+                                <div id='bible' style={{fontSize: userPreferences.fontSize + 'rem'}}>
                                     <Reader myRef={refs.reader} />
                                     <Summary changePage={changePage} myRef={refs.summary} />
                                     <History changePage={changePage} />
-                                    {/* <Options changePage={changePage} /> */}
+                                    <Options changePage={changePage} />
                                     <Navbar changePage={changePage} />
                                 </div>
                             :

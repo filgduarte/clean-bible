@@ -54,6 +54,6 @@
     padding-top: var(--size-regular);
     text-align: center;
     font-size: var(--size-small);
-    color: var(--color-primary-shade-1);
+    color: var(--color-primary);
     border-top: 1px solid;
 }

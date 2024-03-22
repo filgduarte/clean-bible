@@ -27,11 +27,12 @@
     height: var(--navbar-height);
     font-size: var(--size-small);
     font-weight: bold;
-    color: var(--color-primary-shade-1);
+    color: var(--color-primary);
+    border-radius: 0;
 }
 
 #page-nav button.active {
-    color: var(--color-primary);
+    color: var(--color-foreground);
     opacity: 1;
 }
 
