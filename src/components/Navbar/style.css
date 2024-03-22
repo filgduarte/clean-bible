@@ -3,7 +3,7 @@
     bottom: 0;
     width: 100%;
     background-color: var(--color-background);
-    border-radius: var(--size-large);
+    border-radius: var(--size-large) var(--size-large) 0 0;
     box-shadow: 0 calc(var(--size-smallest) * -1) var(--size-large) color-mix(in srgb, var(--color-primary) 33%, transparent);
     z-index: 9;
 }

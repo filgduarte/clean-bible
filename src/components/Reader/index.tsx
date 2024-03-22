@@ -1,5 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { Bookmark } from "lucide-react";
+import { addToHistory } from "../../models/history";
 import { UserPreferencesContext, PageContext, HistoryContext } from "../../context";
 import { bibleInfo } from "../../utils";
 import { ReaderProps, BibleData } from "./types";
@@ -46,6 +47,7 @@ function Reader({myRef}: ReaderProps) {
             className={(pageInfo.page == 'read') ? '' : 'hidden'}
             style={{fontSize: userPreferences.fontSize + 'rem'}}
             ref={myRef}
+            onClick={e => handleReaderClick(e)}
         >
             <div id='bookmark-tag' className={isBookmark ? 'active' : ''}>
                 <Bookmark />
@@ -71,6 +73,62 @@ function Reader({myRef}: ReaderProps) {
             </p>
         </main>
     )
+
+    function handleReaderClick(event: React.MouseEvent<HTMLElement, MouseEvent>) {
+        const threshold = 100;
+        const target = event.currentTarget as HTMLDivElement;
+
+        if ( ! target )
+            return
+
+        if (event.clientX <= threshold)
+            goToPreviousChapter();
+
+        else if (event.clientX >= target?.offsetWidth - threshold)
+            goToNextChapter();
+    }
+    
+    async function goToNextChapter() {
+        let nextChapter = null;
+
+        if (currentReading.chapter < bibleInfo[currentReading.book].chapters - 1) {
+            nextChapter = {
+                book: currentReading.book,
+                chapter: currentReading.chapter + 1,
+            };
+        }
+        else if (currentReading.book < bibleInfo.length - 1) {
+            nextChapter = {
+                book: currentReading.book + 1,
+                chapter: 0
+            };
+        }
+
+        if (nextChapter) {
+            await addToHistory(nextChapter);
+        }
+    }
+
+    async function goToPreviousChapter() {
+        let previousChapter = null;
+
+        if (currentReading.chapter > 0) {
+            previousChapter = {
+                book: currentReading.book,
+                chapter: currentReading.chapter - 1
+            };
+        }
+        else if (currentReading.book > 0) {
+            previousChapter = {
+                book: currentReading.book - 1,
+                chapter: bibleInfo[currentReading.book - 1].chapters - 1
+            };
+        }
+
+        if (previousChapter) {
+            await addToHistory(previousChapter);
+        }
+    }
 }
 
 export default Reader;
