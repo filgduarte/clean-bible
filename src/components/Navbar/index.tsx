@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { History, List, BookOpenText, Ellipsis } from "lucide-react";
-import { PageContext } from "../../context";
+import { PageContext, HistoryContext } from "../../context";
 import { NavbarProps } from "./types";
 import CurrentChapterStats from "../CurrentChapterStats";
 import TestamentAnchors from "../TestamentAnchors";
@@ -9,26 +9,31 @@ import './style.css';
 
 function Navbar({changePage}: NavbarProps) {
     const pageInfo = useContext(PageContext);
+    const currentBook = useContext(HistoryContext)[0].book;
     const navItems = [
         {
             id: 'history',
             icon: <History />,
             label: 'Histórico',
+            action: () => changePage('history')
         },
         {
             id: 'summary',
             icon: <List />,
             label: 'Índice',
+            action: () => changePage('summary', currentBook, `book-selector-${currentBook}`)
         },
         {
             id: 'read',
             icon: <BookOpenText />,
             label: 'Leitura',
+            action: () => changePage('read')
         },
         {
             id: 'options',
             icon: <Ellipsis />,
             label: 'Opções',
+            action: () => changePage('options')
         },
     ]
 
@@ -49,7 +54,7 @@ function Navbar({changePage}: NavbarProps) {
                             className={(item.id == pageInfo.page) ? 'active' : ''}
                             label={item.label}
                             icon={item.icon}
-                            action = {() => changePage(item.id)}
+                            action = {item.action}
                             key={index}
                         />
                     )

@@ -3,7 +3,7 @@ import { AppDefs, BibleInfo } from "./types";
 export const appDefs: AppDefs = {
     pages: [ 'read', 'summary', 'history', 'options' ],
     languages: [ 'pt' ],
-    bibleVersions: [ 'blivre' ],
+    bibleVersions: [ 'blivre', 'nvi' ],
     fontSizeLimit: { min: 1, max: 2 },
     historySize: 50,
 };
@@ -81,14 +81,17 @@ export function scrollToTop() {
     window.scrollTo({ top: 0 });
 }
 
-export function scrollTo(targetId: string, parentId?:string) {
+export function scrollTo(targetId: string, parentId?: string, smooth?: ScrollBehavior) {
     const parent = parentId ? document.getElementById(parentId) : window;    
     
     if ( ! parent)
         throw 'Elemento container não encontrado no DOM: ' + parentId;
 
     if (targetId == 'top') {
-        parent.scrollTo({ top: 0 });
+        parent.scrollTo({
+            top: 0,
+            behavior: smooth ?? 'auto'
+        });
         return;
     }
 
@@ -96,5 +99,7 @@ export function scrollTo(targetId: string, parentId?:string) {
 
     if ( ! target )
         throw 'Elemento alvo não encontrado no DOM: ' + targetId;
-    target.scrollIntoView();
+    target.scrollIntoView({
+        behavior: smooth ?? 'auto'
+    });
 }

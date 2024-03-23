@@ -1,9 +1,9 @@
 import { useContext, useState, useEffect } from "react";
-import { Bookmark } from "lucide-react";
 import { addToHistory } from "../../models/history";
 import { UserPreferencesContext, PageContext, HistoryContext } from "../../context";
 import { bibleInfo } from "../../utils";
 import { ReaderProps, BibleData } from "./types";
+import Bookmark from "../Bookmark";
 import './style.css';
 
 function Reader({myRef}: ReaderProps) {
@@ -12,14 +12,6 @@ function Reader({myRef}: ReaderProps) {
     const currentReading = useContext(HistoryContext)[0];
     const [bibleData, setBibleData] = useState<BibleData>();
     const [placeholder, setPlaceholder] = useState('Carregando...');
-    let isBookmark = false;
-
-    if (userPreferences.bookmark) {
-        const bookmark = JSON.parse(userPreferences.bookmark);
-
-        if (bookmark.book == currentReading.book && bookmark.chapter == currentReading.chapter)
-            isBookmark = true;
-    }
 
     useEffect(() => {
         const params = {
@@ -48,9 +40,8 @@ function Reader({myRef}: ReaderProps) {
             ref={myRef}
             onClick={e => handleReaderClick(e)}
         >
-            <div id='bookmark-tag' className={isBookmark ? 'active' : ''}>
-                <Bookmark />
-            </div>
+            {/* <Bookmark /> */}
+
             <h1>
                 {bibleInfo[currentReading.book].name} {currentReading.chapter + 1}
             </h1>
@@ -75,15 +66,19 @@ function Reader({myRef}: ReaderProps) {
 
     function handleReaderClick(event: React.MouseEvent<HTMLElement, MouseEvent>) {
         const threshold = 100;
-        const target = event.currentTarget as HTMLDivElement;
+        const currentTarget = event.currentTarget as HTMLDivElement;
+        const target = event.target as HTMLElement;
 
-        if ( ! target )
+        if ( ! currentTarget )
+            return
+
+        if (target && target.getAttribute('id')?.includes('bookmark'))
             return
 
         if (event.clientX <= threshold)
             goToPreviousChapter();
 
-        else if (event.clientX >= target?.offsetWidth - threshold)
+        else if (event.clientX >= currentTarget?.offsetWidth - threshold)
             goToNextChapter();
     }
     

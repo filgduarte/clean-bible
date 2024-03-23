@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import {
     Sun,
     Moon,
@@ -6,21 +6,13 @@ import {
     AArrowDown,
 } from "lucide-react";
 import { db } from "../../models/db";
-import { addToHistory } from "../../models/history";
-import { UserPreferencesContext, PageContext, HistoryContext } from "../../context";
-import { appDefs, bibleInfo } from "../../utils";
-import { OptionsProps } from "./types";
+import { UserPreferencesContext, PageContext } from "../../context";
+import { appDefs } from "../../utils";
 import './style.css';
 
-function Options({changePage}: OptionsProps) {
+function Options() {
     const userPreferences = useContext(UserPreferencesContext);
     const currentPage = useContext(PageContext).page;
-    const history = useContext(HistoryContext);
-
-    const [options, setOptions] = useState({
-        bibleVersion: userPreferences.bibleVersion,
-        theme: userPreferences.theme
-    });
 
     useEffect(() => {
         switch (userPreferences.theme) {
@@ -44,7 +36,7 @@ function Options({changePage}: OptionsProps) {
                     <select
                         id='bible-version'
                         name='bible-version'
-                        value={options.bibleVersion}
+                        value={userPreferences.version}
                         onChange={handleVersionChange}
                     >
                         {
@@ -71,7 +63,7 @@ function Options({changePage}: OptionsProps) {
                             id='theme-light'
                             name='theme'
                             value='light'
-                            checked={options.theme == 'light'}
+                            checked={userPreferences.theme == 'light'}
                             onChange={handleThemeChange}
                         />
                     </div>
@@ -84,7 +76,7 @@ function Options({changePage}: OptionsProps) {
                             id='theme-dark'
                             name='theme'
                             value='dark'
-                            checked={options.theme == 'dark'}
+                            checked={userPreferences.theme == 'dark'}
                             onChange={handleThemeChange}
                         />
                     </div>
@@ -113,37 +105,28 @@ function Options({changePage}: OptionsProps) {
         </section>
     )
 
-    async function handleVersionChange(event: React.FormEvent) {
+    async function handleVersionChange(event: React.ChangeEvent<HTMLSelectElement>) {
         const selectElement = event.target as HTMLSelectElement;
 
         try {
             await db.preferences.put({
-                option: 'bibleVersion',
+                option: 'version',
                 value: selectElement.value,
             });
-
-            setOptions(prev => ({
-                ...prev,
-                bibleVersion: selectElement.value,
-            }));
+            console.log(selectElement.value);
         }
         catch(err) {
             console.log(err);
         }
     }
 
-    async function handleThemeChange(event: React.FormEvent) {
+    async function handleThemeChange(event: React.ChangeEvent<HTMLInputElement>) {
         const radioElement = event.target as HTMLInputElement;
         try {
             await db.preferences.put({
                 option: 'theme',
                 value: radioElement.value,
             });
-
-            setOptions(prev => ({
-                ...prev,
-                theme: radioElement.value,
-            }));
         }
         catch(err) {
             console.log(err);

@@ -90,7 +90,7 @@ function Summary({changePage, myRef}: SummaryProps) {
     function handleAccordionItemClick(index: number) {
         const targetPage = pageInfo.page;
         const targetBook = (index === pageInfo.book) ? -1 : index
-        const targetScroll = 'top';
+        const targetScroll = `book-selector-${index}`;
 
         changePage(targetPage, targetBook, targetScroll);
     }

@@ -3,7 +3,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { db } from "./models/db";
 import { UserPreferencesContext, PageContext, HistoryContext, RefContext } from "./context";
 import { appDefs, scrollTo } from "./utils";
-import { UserPreferenceOptions, PageInfo, HistoryEntry } from "./types";
+import { UserPreferenceOptions, PageInfo, ScrollDefs, HistoryEntry } from "./types";
 import Options from "./components/Options";
 import Reader from "./components/Reader";
 import Navbar from "./components/Navbar";
@@ -15,7 +15,11 @@ function App() {
         reader: useRef(null),
         summary: useRef(null)
     }
-    const [pageInfo, setPageInfo] = useState<PageInfo>({page: 'read', book: 0, scrollPosition: 'top'});
+    const [pageInfo, setPageInfo] = useState<PageInfo>({page: 'read', book: 0});
+    const [scrollDefs, setScrollDefs] = useState<ScrollDefs>({
+        position: 'top',
+        behavior: 'auto'
+    });
     const preferencesResults = useLiveQuery(
         () => db.preferences.toArray()
     );
@@ -46,10 +50,10 @@ function App() {
     }
 
     useEffect(() => {
-        if ( document.getElementById(pageInfo.page) ) {
-            scrollTo(pageInfo.scrollPosition, pageInfo.page);
+        if ( document.getElementById(pageInfo.page) && scrollDefs.position ) {
+            scrollTo(scrollDefs.position, pageInfo.page, scrollDefs.behavior);
         }
-    }, [pageInfo, history]);
+    }, [pageInfo, history, scrollDefs]);
 
     return (
         <UserPreferencesContext.Provider value={userPreferences}>    
@@ -63,7 +67,7 @@ function App() {
                                     <Reader myRef={refs.reader} />
                                     <Summary changePage={changePage} myRef={refs.summary} />
                                     <History changePage={changePage} />
-                                    <Options changePage={changePage} />
+                                    <Options />
                                     <Navbar changePage={changePage} />
                                 </div>
                             :
@@ -81,14 +85,22 @@ function App() {
     function changePage(
         targetPage: string,
         targetBook: number = pageInfo.book,
-        targetScroll: string = 'top'
+        targetScroll?: string,
+        smooth?: ScrollBehavior
     ) {
         if ( appDefs.pages.includes(targetPage) ) {
             setPageInfo({
                 page: targetPage,
                 book: targetBook,
-                scrollPosition: targetScroll
             });
+
+            setScrollDefs(prev => (
+                {
+                    ...prev,
+                    ...(targetScroll && { position: targetScroll }),
+                    ...(smooth && { behavior: smooth })
+                }
+            ));
         }
     }
 }
