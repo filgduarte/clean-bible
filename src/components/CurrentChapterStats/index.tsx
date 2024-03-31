@@ -23,7 +23,7 @@ function CurrentChapterStats() {
     }, [readerRef]);
 
     return(
-        <div id='current-chapter-stats' className='extra-nav'>
+        <aside id='current-chapter-stats' className='extra-nav'>
             <h3>
                 {bibleInfo[currentReading.book].name}
             </h3>
@@ -33,7 +33,7 @@ function CurrentChapterStats() {
             <div className='progress-container'>
                 <div className='progress-bar' style={{width: scrollProgress}}></div>
             </div>
-        </div>
+        </aside>
     )
 
     function scrollListener(element: HTMLDivElement) {

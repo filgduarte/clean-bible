@@ -1,3 +1,7 @@
+#navbar #options.extra-nav {
+    height: auto;
+}
+
 #options dl {
     display: grid;
     grid-template-columns: 1fr auto;
@@ -12,13 +16,15 @@
 }
 
 #options :is(input, select, button, .option-group) {
-    padding: 0 var(--size-small);
+    --_height: calc(var(--size-regular) * 2.5);
+
+    padding: 0 var(--size-regular);
     margin: 0;
     min-width: calc(var(--size-largest) * 2);
-    height: calc(var(--size-largest) * 1.2);
-    background: var(--color-primary-shade-2);
+    height: var(--_height);
+    background: var(--color-secondary-dim);
     border: none;
-    border-radius: var(--size-small);
+    border-radius: var(--_height);
 }
 
 #options select {
@@ -37,7 +43,8 @@
 }
 
 #options button:disabled {
-    color: var(--color-primary-shade-1);
+    color: var(--color-secondary);
+    background-color: transparent;
 }
 
 .option-theme .option-group {
@@ -56,7 +63,8 @@
 }
 
 #options .option-theme .option-group:has(input:checked) {
-    background-color: var(--color-primary)
+    background-color: var(--color-primary);
+    color: var(--color-background);
 }
 
 .option-theme label,

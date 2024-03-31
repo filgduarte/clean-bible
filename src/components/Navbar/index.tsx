@@ -4,6 +4,7 @@ import { PageContext, HistoryContext } from "../../context";
 import { NavbarProps } from "./types";
 import CurrentChapterStats from "../CurrentChapterStats";
 import TestamentAnchors from "../TestamentAnchors";
+import Options from "../Options";
 import NavItem from "../NavItem";
 import './style.css';
 
@@ -39,12 +40,10 @@ function Navbar({changePage}: NavbarProps) {
 
     return(
         <nav id='navbar' className={pageInfo.page}>
-            {
-                (pageInfo.page == 'read') ?
-                    <CurrentChapterStats />
-                : (pageInfo.page == 'summary') &&
-                    <TestamentAnchors />
-            }
+
+            {(pageInfo.page == 'read') && <CurrentChapterStats />}
+            {(pageInfo.page == 'summary') && <TestamentAnchors />}
+            {(pageInfo.page == 'options') && <Options />}
 
             <div id='page-nav'>
                 {

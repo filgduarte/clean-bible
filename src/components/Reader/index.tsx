@@ -34,9 +34,14 @@ function Reader({myRef}: ReaderProps) {
     }, [userPreferences.version]);
 
     return (
-        <main
+        <section
             id='read'
-            className={(pageInfo.page == 'read') ? '' : 'hidden'}
+            className={
+                (pageInfo.page == 'read') ? ''
+                : (pageInfo.page == 'options') ? 'dim'
+                : 'hidden'
+            }
+            style={{fontSize: userPreferences.fontSize + 'rem'}}
             ref={myRef}
             onClick={e => handleReaderClick(e)}
         >
@@ -61,7 +66,7 @@ function Reader({myRef}: ReaderProps) {
             <p className='copyright'>
                 {bibleData?.copyright}
             </p>
-        </main>
+        </section>
     )
 
     function handleReaderClick(event: React.MouseEvent<HTMLElement, MouseEvent>) {

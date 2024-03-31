@@ -8,7 +8,9 @@ function NavItem({id, className, label, icon, action}: NavItemProps) {
             title={label}
             onClick={action}
         >
-            {icon}
+            <div className='nav-icon'>
+                {icon}
+            </div>
             {label}
         </button>
     );

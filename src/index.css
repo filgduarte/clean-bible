@@ -4,21 +4,21 @@
 
 :root {
   --max-width: 900px;
-  --size-regular: 16px;
-  --size-smallest: calc(var(--size-regular) / 2);
-  --size-small: calc(var(--size-regular) / 1.333);
-  --size-large: calc(var(--size-regular) * 1.67);
+  --size-regular: 1rem;
+  --size-smallest: calc(var(--size-regular) * 0.5);
+  --size-small: calc(var(--size-regular) * 0.75);
+  --size-large: calc(var(--size-regular) * 1.5);
   --size-largest: calc( var(--size-regular) * 2);
-  --navbar-height: calc(var(--size-largest) * 2);
+  --navbar-height: calc(var(--size-regular) * 3.5);
 
-  --color-foreground: #191009;
-  --color-background: #FBF7F4;
-  --color-primary: #A5836A;
-  --color-primary-shade-1: #CCB29C;
-  --color-primary-shade-2: #F4E1CE;
+  --color-background: #FFF;
+  --color-foreground: #222;
+  --color-primary: #000;
+  --color-secondary: #777;
+  --color-secondary-dim: #EDEDED;
 
   font-family: system-ui, sans-serif;
-  font-size: 18px;
+  font-size: var(--size-regular);
   font-weight: 400;
   line-height: 1.5;
 
@@ -26,10 +26,11 @@
 }
 
 body.dark {
-    --color-foreground: #f6ece5;
-    --color-background: #0b0704;
-    --color-primary-shade-1: #634F40;
-    --color-primary-shade-2: #211A15;
+  --color-background: #000;
+  --color-foreground: #EEE;
+  --color-primary: #FFF;
+  --color-secondary: #777;
+  --color-secondary-dim: #121212;
 }
 
 body {
@@ -40,22 +41,27 @@ body {
   min-height: 100vh;
   background-color: var(--color-background);
   color: var(--color-foreground);
+  -webkit-tap-highlight-color: var(--color-secondary-dim);
 }
 
-main, section {
+section {
+  display: flex;
+  flex-direction: column;
+  gap: calc( var(--size-small) / 2);
   height: calc(100% - var(--navbar-height) - var(--size-largest));
   padding: var(--size-regular) var(--size-large);
   overflow-y: auto;
 }
 
 h1 {
-  margin: 0.5rem 0 1.5rem;
-  font-size: 1.333rem;
+  margin: 0;
+  font-size: 1.5em;
+  line-height: 1;
   color: var(--color-primary);
 }
 
 h2 {
-  font-size: 1.333rem;
+  font-size: 1.333em;
 }
 
 button {
@@ -71,7 +77,7 @@ button {
 }
 
 button:is(:focus, :focus-visible, :focus-within, :active, :target) {
-  background-color: var(--color-primary-shade-2) !important;
+  background-color: var(--color-secondary-dim);
 }
 
 #app {

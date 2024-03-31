@@ -33,7 +33,7 @@ function TestamentAnchors() {
     }, [summaryRef, observerRef]);
 
     return(
-        <div id='testament-anchors' className='extra-nav'>
+        <aside id='testament-anchors' className='extra-nav'>
             <a
                 id='goto-testament-0'
                 className={(currentTestament === 0) ? 'active' : ''}
@@ -48,7 +48,7 @@ function TestamentAnchors() {
             >
                 Novo Testamento
             </a>
-        </div>
+        </aside>
     )
 
     function handleIntersection(entries: IntersectionObserverEntry[]) {

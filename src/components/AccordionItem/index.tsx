@@ -1,4 +1,5 @@
 import { AccordionItemProps } from "./types";
+import './style.css';
 
 function AccordionItem({id, title, active, onClick, children} : AccordionItemProps) {    
     return(
@@ -15,7 +16,6 @@ function AccordionItem({id, title, active, onClick, children} : AccordionItemPro
             </h2>
             <section
                 id={`${id}-panel`}
-                className={active ? '' : 'hidden'}
                 aria-labelledby={`${id}-header`}
                 aria-expanded={active}
             >

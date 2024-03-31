@@ -1,5 +1,9 @@
+#read.dim {
+    opacity: 0.5;
+}
+
 #read ol {
-    margin: 0.5em 0;
+    margin: 1em 0;
     padding: 0;
     font-size: 1em;
     list-style: none;
@@ -8,16 +12,17 @@
 
 #read li  {
     counter-increment: verses-counter;
-    line-height: 1.5em;
+    line-height: 1.65em;
 }
 
 #read li::before {
     display: inline-block;
     content: counter(verses-counter);
     margin-right: 0.5em;
-    font-size: 0.6875rem;
+    font-size: 0.6875em;
     font-weight: bold;
-    color: var(--color-primary);
+    line-height: 1em;
+    color: var(--color-secondary);
     transform: translateY(-0.12em);
 }
 
@@ -53,7 +58,7 @@
     margin-top: var(--size-largest);
     padding-top: var(--size-regular);
     text-align: center;
-    font-size: var(--size-small);
-    color: var(--color-primary);
-    border-top: 1px solid;
+    font-size: 0.75em;
+    color: var(--color-secondary);
+    border-top: 1px solid var(--color-secondary);
 }

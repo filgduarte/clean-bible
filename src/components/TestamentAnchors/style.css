@@ -1,12 +1,16 @@
+#testament-anchors {
+    --_height: calc(var(--size-smallest) / 2);
+}
+
 #testament-anchors::before {
     content: '';
     display: block;
     position: absolute;
-    bottom: calc(var(--size-smallest) / -2.7);
+    bottom: 0;
     width: calc(100% - (var(--size-large) * 2));
-    height: calc(var(--size-smallest) / 2.7);
-    background-color: color-mix(in srgb, var(--color-primary-shade-1) 75%, transparent);
-    border-radius: calc(var(--size-smallest) / 2.7);
+    height: var(--_height);
+    background-color: var(--color-secondary-dim);
+    border-radius: var(--_height);
 }
 
 #testament-anchors a {
@@ -29,9 +33,9 @@
     content: '';
     display: block;
     position: absolute;
-    bottom: calc(var(--size-smallest) / -2.7);
+    bottom: 0;
     width: 100%;
-    height: calc(var(--size-smallest) / 2.7);
+    height: var(--_height);
     background-color: var(--color-primary);
-    border-radius: calc(var(--size-smallest) / 2.7);
+    border-radius: var(--_height);
 }

@@ -64,4 +64,6 @@ export interface PageComponent {
 export type ChangePage = (
     targetPage: string,
     targetBook?: number,
-    targetScroll?: string) => void;
+    targetScroll?: string,
+    smooth?: ScrollBehavior
+) => void;

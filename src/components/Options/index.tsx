@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import {
     Sun,
     Moon,
@@ -6,30 +6,15 @@ import {
     AArrowDown,
 } from "lucide-react";
 import { db } from "../../models/db";
-import { UserPreferencesContext, PageContext } from "../../context";
+import { UserPreferencesContext } from "../../context";
 import { appDefs } from "../../utils";
 import './style.css';
 
 function Options() {
     const userPreferences = useContext(UserPreferencesContext);
-    const currentPage = useContext(PageContext).page;
-
-    useEffect(() => {
-        switch (userPreferences.theme) {
-            case 'light':
-                document.body.classList.remove('dark');
-                document.body.classList.add('light');
-            break;
-            case 'dark':
-                document.body.classList.remove('light');
-                document.body.classList.add('dark');
-            break;
-        }
-    }, [userPreferences.theme]);
 
     return (
-        <section id='options'  className={(currentPage == 'options') ? '' : 'hidden'}>
-            <h1>Opções</h1>
+        <aside id='options' className='extra-nav'>
             <dl id='options-menu'>
                 <dt className='option-version'>Versão da Bíblia</dt>
                 <dd className='option-version'>
@@ -102,7 +87,7 @@ function Options() {
                     </button>
                 </dd>
             </dl>
-        </section>
+        </aside>
     )
 
     async function handleVersionChange(event: React.ChangeEvent<HTMLSelectElement>) {

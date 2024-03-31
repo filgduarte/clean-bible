@@ -90,9 +90,8 @@ function Summary({changePage, myRef}: SummaryProps) {
     function handleAccordionItemClick(index: number) {
         const targetPage = pageInfo.page;
         const targetBook = (index === pageInfo.book) ? -1 : index
-        const targetScroll = `book-selector-${index}`;
 
-        changePage(targetPage, targetBook, targetScroll);
+        changePage(targetPage, targetBook, 'none');
     }
 
     async function onBookChapterSelect(selectedBook: number, selectedChapter: number) {
@@ -100,7 +99,7 @@ function Summary({changePage, myRef}: SummaryProps) {
             book: selectedBook,
             chapter: selectedChapter,
         })
-        .then(() => changePage('read', selectedBook, 'top'));
+        .then(() => changePage('read', selectedBook));
     }
 }
 

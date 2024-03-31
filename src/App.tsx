@@ -4,7 +4,6 @@ import { db } from "./models/db";
 import { UserPreferencesContext, PageContext, HistoryContext, RefContext } from "./context";
 import { appDefs, scrollTo } from "./utils";
 import { UserPreferenceOptions, PageInfo, ScrollDefs, HistoryEntry } from "./types";
-import Options from "./components/Options";
 import Reader from "./components/Reader";
 import Navbar from "./components/Navbar";
 import Summary from "./components/Summary";
@@ -50,10 +49,21 @@ function App() {
     }
 
     useEffect(() => {
-        if ( document.getElementById(pageInfo.page) && scrollDefs.position ) {
+        switch (userPreferences.theme) {
+            case 'light':
+                document.body.classList.remove('dark');
+                document.body.classList.add('light');
+            break;
+            case 'dark':
+                document.body.classList.remove('light');
+                document.body.classList.add('dark');
+            break;
+        }
+
+        if ( document.getElementById(pageInfo.page) && scrollDefs.position && scrollDefs.position != 'none') {
             scrollTo(scrollDefs.position, pageInfo.page, scrollDefs.behavior);
         }
-    }, [pageInfo, history, scrollDefs]);
+    }, [pageInfo.page, history, scrollDefs, userPreferences.theme]);
 
     return (
         <UserPreferencesContext.Provider value={userPreferences}>    
@@ -63,13 +73,12 @@ function App() {
 
                         {(preferencesResults && HistoryResult)
                             ?
-                                <div id='bible' style={{fontSize: userPreferences.fontSize + 'rem'}}>
+                                <main id='bible'>
                                     <Reader myRef={refs.reader} />
                                     <Summary changePage={changePage} myRef={refs.summary} />
                                     <History changePage={changePage} />
-                                    <Options />
                                     <Navbar changePage={changePage} />
-                                </div>
+                                </main>
                             :
                                 <div id='loading'>
                                     Carregando...
@@ -85,15 +94,14 @@ function App() {
     function changePage(
         targetPage: string,
         targetBook: number = pageInfo.book,
-        targetScroll?: string,
-        smooth?: ScrollBehavior
+        targetScroll: string = 'top',
+        smooth: ScrollBehavior = 'auto'
     ) {
         if ( appDefs.pages.includes(targetPage) ) {
             setPageInfo({
                 page: targetPage,
                 book: targetBook,
             });
-
             setScrollDefs(prev => (
                 {
                     ...prev,
